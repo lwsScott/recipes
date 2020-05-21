@@ -1,0 +1,20 @@
+{
+"name": "lscottgr/328/recipes",
+"authors": [
+{
+"name": "Lewis Scott",
+"email": "lscott19@mail.greenriver.edu"
+
+},
+{
+  "name": "Qinghang Zhang",
+  "email": "qzhang9@mail.greenriver.edu"
+}
+],
+"require": {
+"bcosca/fatfree-core": "dev-master"
+},
+  "autoload": {
+    "classmap": ["classes/", "model/"]
+  }
+}

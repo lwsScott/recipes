@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home</title>
+    <!-- Header  -->
+    <include href="includes/header.html"></include>
+</head>
+<body>
+<!-- Navbar -->
+<include href="includes/navBar.html"></include>
+
+<!-- Featured Recipes -->
+<div class="container card rounded">
+    <h2 class="text-center m-3">Featured Recipes</h2>
+
+    <!-- Row One -->
+    <div class="row">
+        <!-- Featured Recipe One -->
+        <div class="col-6">
+            <h2 class="text-center m-3">Recipe One</h2>
+            <div class="text-center">
+                <img class="img-fluid rounded m-3" src="#" alt="image">
+            </div>
+
+            <div class="text-center ml-3 mr-3">
+                <h5 class="text-center">Ingredients</h5>
+                <hr/>
+            </div>
+
+            <div class="text-center ml-3 mr-3">
+                <h5 class="text-center">Directions</h5>
+                <hr/>
+            </div>
+        </div>
+
+        <!-- Featured Recipe Two -->
+        <div class="col-6">
+            <h2 class="text-center m-3">Recipe Two</h2>
+            <div class="text-center">
+                <img class="img-fluid rounded m-3 mx-auto" src="#" alt="image">
+            </div>
+
+            <div class="text-center ml-3 mr-3">
+                <h5 class="text-center">Ingredients</h5>
+                <hr/>
+            </div>
+
+            <div class="text-center ml-3 mr-3">
+                <h5 class="text-center">Directions</h5>
+                <hr/>
+            </div>
+        </div>
+
+    </div>
+    <!-- Row Two -->
+    <div class="row">
+        <!-- Sign up -->
+        <div class="col-6 text-center">
+            <form action="recipes" method="get">
+                <button class="btn btn-primary text-center m-3" type="submit">View Recipes</button>
+            </form>
+        </div>
+
+        <!-- Search -->
+        <div class="col-6 text-center">
+            <form action="submitRequest" method="get">
+                <button class="btn btn-primary text-center m-3" type="submit">Request Recipe submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<include href="includes/footer.html"></include>
+</body>
+</html>
