@@ -26,7 +26,45 @@ $f3->route('GET /', function () {
     ('views/home.html');
 });
 
+// the recipe page route
+$f3->route('GET|POST /recipe', function () {
+    //echo '<h1>Initial home page check</h1>';
+    $view = new Template();
+    echo $view->render
+    ('views/recipe.html');
+});
 
+// the submit recipe page
+$f3->route('GET|POST /submitRecipe', function () {
+    //echo '<h1>Initial home page check</h1>';
+    $view = new Template();
+    echo $view->render
+    ('views/submitRecipe.html');
+});
+
+// the admin page
+$f3->route('GET|POST /admin', function () {
+    //echo '<h1>Initial home page check</h1>';
+    $view = new Template();
+    echo $view->render
+    ('views/admin.html');
+});
+
+// summary page
+$f3->route('GET|POST /summary', function () {
+    //echo '<h1>Initial home page check</h1>';
+    $view = new Template();
+    echo $view->render
+    ('views/summary.html');
+});
+
+// new user submit page route
+$f3->route('GET|POST /newUser', function () {
+    //echo '<h1>Initial home page check</h1>';
+    $view = new Template();
+    echo $view->render
+    ('views/newUser.html');
+});
 
 //Run fat free
 // -> runs class method instance method
