@@ -27,11 +27,11 @@ $f3->route('GET /', function () {
 });
 
 // the recipe page route
-$f3->route('GET|POST /recipe', function () {
+$f3->route('GET|POST /recipes', function () {
     //echo '<h1>Initial home page check</h1>';
     $view = new Template();
     echo $view->render
-    ('views/recipe.html');
+    ('views/recipes.html');
 });
 
 // the submit recipe page
