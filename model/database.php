@@ -12,7 +12,9 @@ class Database
         try {
             //Create a new PDO connection
             $this->_dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-            //echo "Connected!";
+            $this->_dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            echo "Connected!";
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -60,27 +62,35 @@ class Database
 
     function addRecipe($recipe)
     {
-        var_dump($recipe);
+        echo '<h1>I made it to database addRecipe with valid data</h1>';
+        //var_dump($recipe);
 
         //1. Define the query
-        $sql = "INSERT INTO recipe (recipeName, ingredients, directions, description, image)
+        // remove the image for now TODO fix
+        $sql = "INSERT INTO recipes (recipeName, ingredients, directions, description)
                 VALUES (:recipeName, :ingredients, :directions,
-                        :description, :image)";
-
+                        :description)";
+        //var_dump($sql);
         //2. Prepare the statement
         $statement = $this->_dbh->prepare($sql);
-
+        //var_dump($statement);
+        //echo $recipe->getDescription();
         //3. Bind the parameters
-        $statement->bindParam(':recipeName', $recipe->getName());
-        $statement->bindParam(':ingredients', $recipe->getIngredients());
-        $statement->bindParam(':directions', $recipe->getDirections());
-        $statement->bindParam(':description', $recipe->getDescription());
-        $statement->bindParam(':image', $recipe->getImage());
+        $statement->bindParam(':recipeName', $recipe->getName(), PDO::PARAM_STR);
+        $statement->bindParam(':ingredients', $recipe->getIngredients(), PDO::PARAM_STR);
+        $statement->bindParam(':directions', $recipe->getDirections(), PDO::PARAM_STR);
+        $statement->bindParam(':description', $recipe->getDescription(), PDO::PARAM_STR);
+        //$statement->bindParam(':image', $recipe->getImage());
 
         //4. Execute the statement
-        $statement->execute();
-
+        try {
+            $result = $statement->execute();
+            echo "Result: " . $result;
+        } catch(PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
         //Get the key of the last inserted row
         $id = $this->_dbh->lastInsertId();
+        //echo $id;
     }
 }

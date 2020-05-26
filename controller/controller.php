@@ -31,10 +31,13 @@ class RecipeController
      */
     public function viewRecipes()
     {
-        //If the form has been submitted
-        if($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+        $result = $GLOBALS['db']->getRecipes();
+        foreach ($result as $row) {
+            echo "<p>" . $row['recipeName'] . ", " . $row['ingredients'] . ", " .
+                $row['directions'] . ", " . $row['description'] . ", " . $row['userId'] .
+                ", " . $row['recipeId'] . "</p>";
         }
+
     }
 
     /**
@@ -83,7 +86,7 @@ class RecipeController
 
         // if valid data
         if ($valid) {
-            echo '<h1>I made it here with valid data</h1>';
+            //echo '<h1>I made it here with valid data</h1>';
 
             $recipeName = $_POST['name'];
             $ingredients = $_POST['ingredients'];
@@ -97,7 +100,6 @@ class RecipeController
             //var_dump($recipe);
             // add the recipe to the database
             $GLOBALS['db']->addRecipe($recipe);
-
         }
     }
 
