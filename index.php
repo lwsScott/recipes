@@ -48,45 +48,9 @@ $f3->route('GET|POST /recipes', function () {
 
 // the submit recipe page
 $f3->route('GET|POST /submitRecipe', function ($f3) {
-    //echo '<h1>Initial home page check</h1>';
+    //echo '<h1>I made it here</h1>';
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-        // validate the data
-        $valid = true;
-        // validate name
-        if (!validName($_POST['name'])) {
-            $valid = false;
-            $f3->set('errors["name"]', "Please provide a recipe name");
-        } else {
-            $f3->set('selectedName', $_POST['name']);
-
-        }
-
-        // validate ingredients
-        if (!validIngredients($_POST['ingredients'])) {
-            $valid = false;
-            $f3->set('errors["ingredients"]', "Please provide the ingredients");
-        } else {
-            $f3->set('selectedIngredients', $_POST['ingredients']);
-        }
-
-        // validate directions
-        if (!validDirections($_POST['directions'])) {
-            $valid = false;
-            $f3->set('errors["directions"]', "Please provide the directions");
-        } else {
-            $f3->set('selectedDirections', $_POST['directions']);
-        }
-
-        // validate description
-        if (!validDescription($_POST['description'])) {
-            $valid = false;
-            $f3->set('errors["description"]', "Please provide the description");
-        } else {
-            $f3->set('selectedDescription', $_POST['description']);
-        }
-    }
+    $GLOBALS['controller']->submitRecipe($f3);
 
         /*
         // data is valid

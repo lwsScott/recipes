@@ -60,7 +60,7 @@ class Database
 
     function addRecipe($recipe)
     {
-        //var_dump($student);
+        var_dump($recipe);
 
         //1. Define the query
         $sql = "INSERT INTO recipe (recipeName, ingredients, directions, description, image)
