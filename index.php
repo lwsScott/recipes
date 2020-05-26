@@ -17,21 +17,33 @@ session_start();
 // free framework
 // :: invokes static method
 $f3 = Base::instance();
+$f3->set('DEBUG', 3);
+
+// construct a new Database
+// which creates a new PDO connection
+$db = new Database();
+
+// create a new controller
+$controller = new RecipeController($f3);
 
 // Define a default route
-$f3->route('GET /', function () {
+$f3->route('GET /', function ($f3) {
     //echo '<h1>Initial home page check</h1>';
-    $view = new Template();
-    echo $view->render
-    ('views/home.html');
+    //$view = new Template();
+    //echo $view->render
+    //('views/home.html');
+    $GLOBALS['controller']->home();
+
 });
 
 // the recipe page route
 $f3->route('GET|POST /recipes', function () {
     //echo '<h1>Initial home page check</h1>';
-    $view = new Template();
-    echo $view->render
-    ('views/recipes.html');
+    //$view = new Template();
+    //echo $view->render
+    //('views/recipes.html');
+    $GLOBALS['controller']->viewRecipes();
+
 });
 
 // the submit recipe page
