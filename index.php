@@ -48,9 +48,10 @@ $f3->route('GET|POST /recipes', function () {
 
 // the submit recipe page
 $f3->route('GET|POST /submitRecipe', function ($f3) {
-    //echo '<h1>I made it here</h1>';
+    echo '<h1>I made it here</h1>';
 
-    $GLOBALS['controller']->submitRecipe($f3);
+        $GLOBALS['controller']->submitRecipe($f3);
+
 
         /*
         // data is valid

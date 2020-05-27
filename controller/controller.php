@@ -45,9 +45,9 @@ class RecipeController
      */
     public function submitRecipe($f3)
     {
-
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
-            //echo '<h1>I made it here in the controller post method</h1>';
+
+            echo '<h1>I made it here in the controller post method</h1>';
 
             // validate the data
             $valid = true;
@@ -82,24 +82,25 @@ class RecipeController
             } else {
                 $f3->set('selectedDescription', $_POST['description']);
             }
-        }
 
-        // if valid data
-        if ($valid) {
-            //echo '<h1>I made it here with valid data</h1>';
 
-            $recipeName = $_POST['name'];
-            $ingredients = $_POST['ingredients'];
-            $directions = $_POST['directions'];
-            $description = $_POST['description'];
-            $image = $_POST['image'];
-            $submitter = $_POST['submitter'];
+            // if valid data
+            if ($valid) {
+                echo '<h1>I made it here with valid data</h1>';
 
-            // construct a recipe object
-            $recipe = new Recipe($recipeName, $ingredients, $directions, $description, $image, $submitter);
-            //var_dump($recipe);
-            // add the recipe to the database
-            $GLOBALS['db']->addRecipe($recipe);
+                $recipeName = $_POST['name'];
+                $ingredients = $_POST['ingredients'];
+                $directions = $_POST['directions'];
+                $description = $_POST['description'];
+                $image = $_POST['image'];
+                $submitter = $_POST['submitter'];
+
+                // construct a recipe object
+                $recipe = new Recipe($recipeName, $ingredients, $directions, $description, $image, $submitter);
+                //var_dump($recipe);
+                // add the recipe to the database
+                $GLOBALS['db']->addRecipe($recipe);
+            }
         }
     }
 
