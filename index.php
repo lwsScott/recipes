@@ -37,21 +37,20 @@ $f3->route('GET /', function ($f3) {
 });
 
 // the recipe page route
-$f3->route('GET|POST /recipes', function () {
+$f3->route('GET|POST /recipes', function ($f3) {
     //echo '<h1>Initial home page check</h1>';
     //$view = new Template();
     //echo $view->render
     //('views/recipes.html');
-    $GLOBALS['controller']->viewRecipes();
+    $GLOBALS['controller']->viewRecipes($f3);
 
 });
 
 // the submit recipe page
 $f3->route('GET|POST /submitRecipe', function ($f3) {
-    echo '<h1>I made it here</h1>';
+    //echo '<h1>I made it here</h1>';
 
         $GLOBALS['controller']->submitRecipe($f3);
-
 
         /*
         // data is valid

@@ -14,7 +14,7 @@ class Database
             $this->_dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
             $this->_dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            echo "Connected!";
+            //echo "Connected!";
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -83,12 +83,9 @@ class Database
         //$statement->bindParam(':image', $recipe->getImage());
 
         //4. Execute the statement
-        try {
-            $result = $statement->execute();
-            echo "Result: " . $result;
-        } catch(PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
+        $result = $statement->execute();
+        echo "Result: " . $result;
+
         //Get the key of the last inserted row
         $id = $this->_dbh->lastInsertId();
         //echo $id;

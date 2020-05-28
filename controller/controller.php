@@ -29,15 +29,32 @@ class RecipeController
     /**
      * Process the order route
      */
-    public function viewRecipes()
+    public function viewRecipes($f3)
     {
         $result = $GLOBALS['db']->getRecipes();
+
+        //var_dump($result);
+        $f3->set('results', $result);
+
+        $view = new Template();
+        echo $view->render('views/recipes.php');
+        /*
+        foreach ($result as $row)
+        {
+            echo "<tr>";
+            echo "<td>" . $row['recipeName'] . "</td>";
+            echo "<td>" . $row['userId'] . "</td>";
+            echo "<td>" . $row['description'] . "</td>";
+            echo "</tr>";
+        }
+        */
+        /*
         foreach ($result as $row) {
             echo "<p>" . $row['recipeName'] . ", " . $row['ingredients'] . ", " .
                 $row['directions'] . ", " . $row['description'] . ", " . $row['userId'] .
                 ", " . $row['recipeId'] . "</p>";
         }
-
+        */
     }
 
     /**
