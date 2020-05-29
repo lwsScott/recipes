@@ -91,6 +91,32 @@ $f3->route('GET|POST /newUser', function () {
     ('views/newUser.html');
 });
 
+//Define a route that displays student detail
+$f3->route('GET|POST /viewUser', function(){
+
+    $GLOBALS['controller']->viewUser();
+});
+
+// new user submit page route
+$f3->route('GET|POST /newUser', function () use ($f3) {
+    echo '<h1>I made it here</h1>';
+    $GLOBALS['controller']->newUser();
+//    $f3->set('firstName', $_POST['firstName']);
+//    $f3->set('lastName', $_POST['lastName']);
+//    $f3->set('phone', $_POST['phone']);
+//    $f3->set('email', $_POST['email']);
+//    $f3->set('username', $_POST['username']);
+//    $f3->set('password', $_POST['password']);
+//    $f3->set('userId', $_POST['userId']);
+//    $f3->set('perId', $_POST['perId']);
+    $view = new Template();
+    echo $view->render
+    ('views/newUser.html');
+
+});
+
+
+
 //Run fat free
 // -> runs class method instance method
 $f3->run();
