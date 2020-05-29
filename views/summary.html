@@ -8,7 +8,44 @@
 <body>
 <include href="includes/navBar.html"></include>
 
+<div class="container">
 
+    
+    <p>{{@SESSION.userId}}{{@SESSION.perId}}</p>
+    <p>{{@SESSION.username}}{{@SESSION.password}}</p>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card" style="width: 18rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Recipe Summary</h5>
+                    <p class="card-text">The summary of your recipe</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Name: {{@SESSION.firstName}}{{@SESSION.lastName}}</li>
+                    <li class="list-group-item">Email:{{@SESSION.email}} </li>
+                    <li class="list-group-item">Phone: {{@SESSION.phone}}</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link">something</a>
+                    <a href="#" class="card-link">something</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <h3>Add or edit permission</h3>
+            <form action="#" method="post" class="form-horizontal">
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Permission</label>
+                    <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="10"></textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary float-right">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <include href="includes/footer.html"></include>
 </body>
 </html>
