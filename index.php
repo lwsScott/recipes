@@ -7,6 +7,7 @@ error_reporting(E_ALL);
 require_once 'vendor/autoload.php';
 //require_once 'model/data-layer.php';
 require_once 'model/validation-functions.php';
+require_once("model/validate.php");
 // start session
 session_start();
 
