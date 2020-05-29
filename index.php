@@ -23,41 +23,32 @@ $f3->set('DEBUG', 3);
 // which creates a new PDO connection
 $db = new Database();
 
+// construct a new validator
+$validator = new Validate();
+
 // create a new controller
-$controller = new RecipeController($f3);
+$controller = new RecipeController($f3, $validator);
 
 // Define a default route
 $f3->route('GET /', function ($f3) {
-    //echo '<h1>Initial home page check</h1>';
-    //$view = new Template();
-    //echo $view->render
-    //('views/home.html');
-    $GLOBALS['controller']->home();
 
+    $GLOBALS['controller']->home();
 });
 
 // the recipes page route
 // displays a list of all recipes using a datatable
 $f3->route('GET|POST /recipes', function ($f3) {
-    //echo '<h1>Initial home page check</h1>';
-    //$view = new Template();
-    //echo $view->render
-    //('views/recipes.html');
-    $GLOBALS['controller']->viewRecipes($f3);
 
+    $GLOBALS['controller']->viewRecipes($f3);
 });
 
 // the recipe page route
 // displays the details of the individual recipe
 $f3->route('GET|POST /recipes/@recipeId', function ($f3, $params) {
-    //echo '<h1>Initial home page check</h1>';
-    //$view = new Template();
-    //echo $view->render
-    //('views/recipes.html');
-    //echo "Here at getting individual recipe";
+
     // access params in a route
     $recipeId = $f3->get('PARAMS.recipeId');
-    //echo $recipeId;
+
     $f3->set('recipeId', $recipeId);
 
     $GLOBALS['controller']->viewRecipe($f3);
@@ -66,26 +57,13 @@ $f3->route('GET|POST /recipes/@recipeId', function ($f3, $params) {
 
 // the submit recipe page
 $f3->route('GET|POST /submitRecipe', function ($f3) {
-    //echo '<h1>I made it here</h1>';
+    echo '<h1>I made it here</h1>';
 
-        $GLOBALS['controller']->submitRecipe($f3);
+    $GLOBALS['controller']->submitRecipe($f3);
 
-        /*
-        // data is valid
-        if($valid) {
-            // store the data in the session array
-            $_SESSION['name'] = $_POST['name'];
-            $_SESSION['questions'] = $_POST['questions'];
-
-            // redirect to summary page
-            $f3->reroute('summary');
-            //session_destroy();
-        }
-    }
-         */
-    $view = new Template();
-    echo $view->render
-    ('views/submitRecipe.html');
+    //$view = new Template();
+    //echo $view->render
+    //('views/submitRecipe.html');
 
 });
 

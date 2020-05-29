@@ -1,24 +1,31 @@
 <?php
 
-/* Define functions to validate data */
-
-function validName($name)
+/**
+ * Class Validate
+ * Contains the validation methods for my app
+ * @author Lewis Scott
+ * @version 1.0
+ */
+class Validate
 {
-    return !empty($name);
-}
+    function validName($name)
+    {
+        return !empty($name);
+    }
 
-function validIngredients($ing)
-{
-    return !empty($ing);
-}
+    function validIngredients($ing)
+    {
+        return !empty($ing);
+    }
 
-function validDirections($dir)
-{
-    return !empty($dir);
-}
+    function validDirections($dir)
+    {
+        return !empty($dir);
+    }
 
-function validDescription($desc)
-{
-    return !empty($desc);
+    function validDescription($desc)
+    {
+        return !empty($desc);
+    }
 }
 
