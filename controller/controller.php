@@ -159,4 +159,105 @@ class RecipeController
 
         session_destroy();
     }
+
+    /*
+     * view user and submit the user detail
+     */
+
+
+    /**
+     *
+     */
+    public function viewUser()
+    {
+//        $result = $GLOBALS['db']->getRecipes();
+//
+//        //var_dump($result);
+//        $f3->set('results', $result);
+//
+//        $view = new Template();
+//        echo $view->render('views/recipes.php');
+
+        $users = $GLOBALS['db']->getUser();
+        $this->_f3->set('users', $users);
+        $template = new Template();
+        echo $template->render('views/viewUser.php');
+    }
+
+
+
+    public function newUser()
+    {
+        $valid = true;
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            if (!validName($_POST['firstName'])) {
+
+                //Set an error variable in the F3 hive
+                $valid = false;
+                $this->_f3->set('errors["firstName"]', "cant be empty");
+                echo "firstname no done";
+
+            }
+
+            if (!validName($_POST['lastName'])) {
+
+                //Set an error variable in the F3 hive
+                $valid = false;
+                $this->_f3->set('errors["lastName"]', "cant be empty");
+                echo "last name not done";
+
+            }
+            if (!validPhone($_POST['phone'])) {
+                $valid = false;
+                $this->_f3->set('errors["phone"]', "must be a number");
+                echo "phone not done";
+
+            }
+            if (!validEmail($_POST['email'])) {
+                $valid = false;
+                //Set an error variable in the F3 hive
+                $this->_f3->set('errors["email"]', "must be a correct format");
+                echo "email false";
+            }
+
+            if ($_POST['username'] == "") {
+                $valid = false;
+                //Set an error variable in the F3 hive
+                $this->_f3->set('errors["username"]', "cant be empty");
+                echo "username false";
+            }
+            if ($_POST['password'] == "") {
+                $valid = false;
+                //Set an error variable in the F3 hive
+                $this->_f3->set('errors["password"]', "cant be empty");
+                echo "password false";
+            }
+            if ($valid) {
+                echo "Finish validation";
+            }
+
+            if ($valid) {
+                echo "start store datebase";
+                $firstName = $_POST['firstName'];
+
+                echo $firstName;
+                $lastName = $_POST['lastName'];
+                echo $lastName;
+                $email = $_POST['email'];
+                $phone = $_POST['phone'];
+                $username = $_POST['username'];
+                $password = $_POST['password'];
+
+
+                // add into it
+                $newUser = new User($firstName, $lastName, $email, $phone,
+                    $username, $password);
+                //var_dump($newUser);
+                $GLOBALS['db']->writeUser($newUser);
+                $this->_f3->reroute('viewUser');
+
+            }
+        }
+    }
 }
