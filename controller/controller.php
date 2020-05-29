@@ -27,7 +27,7 @@ class RecipeController
     }
 
     /**
-     * Process the order route
+     * Process the view Recipes route
      */
     public function viewRecipes($f3)
     {
@@ -55,6 +55,22 @@ class RecipeController
                 ", " . $row['recipeId'] . "</p>";
         }
         */
+    }
+
+    /**
+     * Display the default route
+     */
+    public function viewRecipe($f3)
+    {
+        //echo "Here at view recipe" . $f3->get('recipeId');
+        $result = $GLOBALS['db']->getDetails($f3->get('recipeId'));
+
+        var_dump($result);
+        $f3->set('results', $result);
+
+
+        $view = new Template();
+        echo $view->render('views/recipe.html');
     }
 
     /**

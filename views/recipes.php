@@ -28,7 +28,7 @@ error_reporting(E_ALL);
 
         <repeat group="{{ @results }}" value="{{ @row }}">
             <tr>
-                <td> {{ $row['recipeName'] }} </td>
+                <td> <a href="recipes/{{ $row['recipeId'] }}"> {{ $row['recipeName'] }} </a></td>
                 <td> {{ $row['userId'] }} </td>
                 <td> {{ $row['description'] }}</td>
             </tr>
@@ -36,11 +36,16 @@ error_reporting(E_ALL);
 
     </table>
 
-
-
 </div>
+<!--
+<a href='new-student.php?sid=$sid'-->
 
 
 <include href="includes/footer.html"></include>
+<!-- add data table scripts -->
+<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script>
+    $('#recipes').DataTable();
+</script>
 </body>
 </html><?php

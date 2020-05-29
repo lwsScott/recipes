@@ -44,7 +44,7 @@ class Database
         //1. Define the query
         $sql = "SELECT * 
                 FROM recipes
-                WHERE recipeId = :$recipeId";
+                WHERE recipeId = $recipeId";
 
         //2. Prepare the statement
         $statement = $this->_dbh->prepare($sql);
