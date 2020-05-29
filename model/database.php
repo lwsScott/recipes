@@ -1,6 +1,6 @@
 <?php
 
-require_once ("config-recipe.php");
+//require_once ("config-recipe.php");
 
 class Database
 {
@@ -10,6 +10,17 @@ class Database
     function __construct()
     {
         try {
+            if ($_SERVER['USER'] == 'lscottgr')
+            {
+                require_once '/home2/lscottgr/config.php';
+            }
+            /*
+            else if ($_SERVER['USER'] == 'username2')
+            {
+                require_once '/home/username2/config.php';
+            }
+            */
+
             //Create a new PDO connection
             $this->_dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
             $this->_dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

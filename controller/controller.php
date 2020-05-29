@@ -138,7 +138,7 @@ class RecipeController
             else {
                 $view = new Template();
                 echo $view->render
-                ('views/submitRecipe.html');
+                ('views/submitRecipe');
             }
         } else {
             $view = new Template();
