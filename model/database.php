@@ -14,12 +14,12 @@ class Database
             {
                 require_once '/home2/lscottgr/config.php';
             }
-            /*
-            else if ($_SERVER['USER'] == 'username2')
+
+            else if ($_SERVER['USER'] == 'qzhanggr')
             {
-                require_once '/home/username2/config.php';
+                require_once '/home2/qzhanggr/config.php';
             }
-            */
+
 
             //Create a new PDO connection
             $this->_dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
@@ -100,5 +100,60 @@ class Database
         //Get the key of the last inserted row
         $id = $this->_dbh->lastInsertId();
         //echo $id;
+    }
+
+    /*
+     * The user's database
+     */
+    function getUser()
+    {
+        //1. Define the query
+        $sql = "SELECT * FROM users";
+
+        //2. Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3. Bind the parameters
+
+        //4. Execute the statement
+        $statement->execute();
+
+        //5. Get the result
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+
+
+
+    function writeUser($user)
+    {
+        echo '<h1>database php called</h1>';
+
+        //1. Define the query
+        $sql = "INSERT INTO users ( firstname, lastname, email,
+                phone, username,password)
+                VALUES (:firstname, :lastname, :email, :phone,
+                        :username, :password)";
+
+
+        //2. Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+
+        //3. Bind the parameters
+//        $statement->bindParam(':sid', $user->get());
+        $statement->bindParam(':firstname', $user->getFirstname());
+        $statement->bindParam(':lastname', $user->getLastname());
+        $statement->bindParam(':email', $user->getEmail());
+        $statement->bindParam(':phone', $user->getPhone());
+        $statement->bindParam(':username', $user->getUsername());
+        $statement->bindParam(':password', $user->getPassword());
+
+        //4. Execute the statement
+        $statement->execute();
+
+        //Get the key of the last inserted row
+        $id = $this->_dbh->lastInsertId();
     }
 }
