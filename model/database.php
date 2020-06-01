@@ -20,7 +20,6 @@ class Database
                 require_once '/home2/qzhanggr/config.php';
             }
 
-
             //Create a new PDO connection
             $this->_dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
             $this->_dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -85,12 +84,15 @@ class Database
         //2. Prepare the statement
         $statement = $this->_dbh->prepare($sql);
         //var_dump($statement);
-        //echo $recipe->getDescription();
+        $name = $recipe->getName();
+        $ing = $recipe->getIngredients();
+        $dir = $recipe->getDirections();
+        $desc = $recipe->getDescription();
         //3. Bind the parameters
-        $statement->bindParam(':recipeName', $recipe->getName(), PDO::PARAM_STR);
-        $statement->bindParam(':ingredients', $recipe->getIngredients(), PDO::PARAM_STR);
-        $statement->bindParam(':directions', $recipe->getDirections(), PDO::PARAM_STR);
-        $statement->bindParam(':description', $recipe->getDescription(), PDO::PARAM_STR);
+        $statement->bindParam(':recipeName',$name, PDO::PARAM_STR);
+        $statement->bindParam(':ingredients', $ing, PDO::PARAM_STR);
+        $statement->bindParam(':directions', $dir, PDO::PARAM_STR);
+        $statement->bindParam(':description', $desc, PDO::PARAM_STR);
         //$statement->bindParam(':image', $recipe->getImage());
 
         //4. Execute the statement
@@ -123,32 +125,35 @@ class Database
         return $result;
     }
 
-
-
-
-    function writeUser($user)
+    function writeUser($newUser)
     {
         echo '<h1>database php called</h1>';
 
         //1. Define the query
-        $sql = "INSERT INTO users ( firstname, lastname, email,
-                phone, username,password)
+        $sql = "INSERT INTO users (firstname, lastname, email,
+                phone, username, password)
                 VALUES (:firstname, :lastname, :email, :phone,
                         :username, :password)";
-
 
         //2. Prepare the statement
         $statement = $this->_dbh->prepare($sql);
 
+        //var_dump($statement);
+        $first = $newUser->getFirstname();
+        $last = $newUser->getLastname();
+        $email = $newUser->getEmail();
+        $phone = $newUser->getPhone();
+        $userName = $newUser->getUsername();
+        $password = $newUser->getPassword();
 
         //3. Bind the parameters
-//        $statement->bindParam(':sid', $user->get());
-        $statement->bindParam(':firstname', $user->getFirstname());
-        $statement->bindParam(':lastname', $user->getLastname());
-        $statement->bindParam(':email', $user->getEmail());
-        $statement->bindParam(':phone', $user->getPhone());
-        $statement->bindParam(':username', $user->getUsername());
-        $statement->bindParam(':password', $user->getPassword());
+        // $statement->bindParam(':sid', $user->get());
+        $statement->bindParam(':firstname', $first, PDO::PARAM_STR);
+        $statement->bindParam(':lastname', $last, PDO::PARAM_STR);
+        $statement->bindParam(':email', $email, PDO::PARAM_STR);
+        $statement->bindParam(':phone', $phone, PDO::PARAM_STR);
+        $statement->bindParam(':username', $userName, PDO::PARAM_STR);
+        $statement->bindParam(':password', $password, PDO::PARAM_STR);
 
         //4. Execute the statement
         $statement->execute();

@@ -32,11 +32,14 @@ class RecipeController
      */
     public function viewRecipes()
     {
+        // get the recipes
         $result = $GLOBALS['db']->getRecipes();
 
         //var_dump($result);
+        // store the recipes in the hive as 'results'
         $this->_f3->set('results', $result);
 
+        // display the recipes page
         $view = new Template();
         echo $view->render('views/recipes.php');
         /*
@@ -64,27 +67,30 @@ class RecipeController
     public function viewRecipe()
     {
         //echo "Here at view recipe" . $f3->get('recipeId');
+        // get the details of the recipe from the database
         $result = $GLOBALS['db']->getDetails($this->_f3->get('recipeId'));
 
         var_dump($result);
+        // set the hive variable to the recipe results
         $this->_f3->set('results', $result);
 
-
+        // display the individual recipe page
         $view = new Template();
         echo $view->render('views/recipe.html');
     }
 
     /**
-     *
+     *  Provides a user form to submit a recipe
      */
     public function submitRecipe()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            echo '<h1>I made it here in the controller post method</h1>';
+            //echo '<h1>I made it here in the controller post method</h1>';
 
-            // validate the data
+            // validate the data and set hive variables
             $valid = true;
-            echo $valid;
+            var_dump($_POST);
+            //echo $valid;
             // validate name
             if (!$this->_validator->validName($_POST['name'])) {
                 $valid = false;
@@ -117,23 +123,26 @@ class RecipeController
                 $this->_f3->set('selectedDescription', $_POST['description']);
             }
 
-            echo $valid;
+            //echo $valid;
             // if valid data
             if ($valid) {
-                echo '<h1>I made it here with valid data</h1>';
+                //echo '<h1>I made it here with valid data</h1>';
 
                 $recipeName = $_POST['name'];
                 $ingredients = $_POST['ingredients'];
                 $directions = $_POST['directions'];
                 $description = $_POST['description'];
-                $image = $_POST['image'];
-                $submitter = $_POST['submitter'];
-
+                //$image = $_POST['image'];
+                $image = "";
+                //$submitter = $_POST['submitter'];
+                $submitter = "";
                 // construct a recipe object
                 $recipe = new Recipe($recipeName, $ingredients, $directions, $description, $image, $submitter);
                 //var_dump($recipe);
                 // add the recipe to the database
                 $GLOBALS['db']->addRecipe($recipe);
+                $this->_f3->reroute('recipes');
+
             }
             else {
                 $view = new Template();
@@ -148,7 +157,9 @@ class RecipeController
     }
 
     /**
-     *
+     *  Display a summary of results submitted
+     * TODO figure out how we want to confirm data
+     * between users and recipes
      */
     public function summary()
     {
@@ -163,7 +174,6 @@ class RecipeController
     /*
      * view user and submit the user detail
      */
-
 
     /**
      *
@@ -183,8 +193,6 @@ class RecipeController
         $template = new Template();
         echo $template->render('views/viewUser.php');
     }
-
-
 
     public function newUser()
     {
@@ -241,9 +249,9 @@ class RecipeController
                 echo "start store datebase";
                 $firstName = $_POST['firstName'];
 
-                echo $firstName;
+                //echo $firstName;
                 $lastName = $_POST['lastName'];
-                echo $lastName;
+                //echo $lastName;
                 $email = $_POST['email'];
                 $phone = $_POST['phone'];
                 $username = $_POST['username'];
@@ -258,6 +266,11 @@ class RecipeController
                 $this->_f3->reroute('viewUser');
 
             }
+        }
+        else {
+            $view = new Template();
+            echo $view->render
+            ('views/newUser.html');
         }
     }
 }

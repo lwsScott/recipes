@@ -10,7 +10,6 @@ require_once 'vendor/autoload.php';
 // start session
 session_start();
 
-//echo "Here";
 
 //Create an instance of the Base class
 // instantiates the base class of the fat
@@ -26,7 +25,7 @@ $db = new Database();
 // construct a new validator
 $validator = new ValidateRecipes();
 
-// create a new controller
+// construct a new controller
 $controller = new RecipeController($f3, $validator);
 
 // Define a default route
@@ -49,17 +48,17 @@ $f3->route('GET|POST /recipes/@recipeId', function ($f3, $params) {
     // access params in a route
     $recipeId = $f3->get('PARAMS.recipeId');
 
+    // set the recipeId for use by the controller
     $f3->set('recipeId', $recipeId);
 
     $GLOBALS['controller']->viewRecipe($f3);
-
 });
 
 // the submit recipe page
-$f3->route('GET|POST /submitRecipe', function ($f3) {
-    echo '<h1>I made it here</h1>';
+$f3->route('GET|POST /submitRecipe', function () {
+    //echo '<h1>I made it here</h1>';
 
-    $GLOBALS['controller']->submitRecipe($f3);
+    $GLOBALS['controller']->submitRecipe();
 
     //$view = new Template();
     //echo $view->render
@@ -84,12 +83,14 @@ $f3->route('GET|POST /summary', function () {
 });
 
 // new user submit page route
-$f3->route('GET|POST /newUser', function () {
+/*
+$f3->route('GET|POST /newUser', function ($f3) {
     //echo '<h1>Initial home page check</h1>';
     $view = new Template();
     echo $view->render
     ('views/newUser.html');
 });
+*/
 
 //Define a route that displays student detail
 $f3->route('GET|POST /viewUser', function(){
@@ -98,7 +99,7 @@ $f3->route('GET|POST /viewUser', function(){
 });
 
 // new user submit page route
-$f3->route('GET|POST /newUser', function () use ($f3) {
+$f3->route('GET|POST /newUser', function () {
     echo '<h1>I made it here</h1>';
     $GLOBALS['controller']->newUser();
 //    $f3->set('firstName', $_POST['firstName']);

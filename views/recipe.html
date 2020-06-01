@@ -9,9 +9,12 @@
 <body>
 <include href="includes/navBar.html"></include>
 
-
-<h1>This is where my recipe goes</h1>
-
+<!-- display the recipe -->
+<p class="card mb-0 ml-3 mt-3 p-2">Name: {{ $results['recipeName'] }}</p>
+<p class="card mb-0 ml-3 mt-3 p-2">Submitted by: {{ $results['userId'] }}</p>
+<p class="card mb-0 ml-3 mt-3 p-2">Description: {{ $results['description'] }}</p>
+<p class="card mb-0 ml-3 mt-3 p-2">Ingredients: {{ $results['ingredients'] }}</p>
+<p class="card mb-0 ml-3 mt-3 p-2">Directions: {{ $results['directions'] }}</p>
 
 <include href="includes/footer.html"></include>
 <!-- add data table scripts -->
@@ -20,4 +23,4 @@
     $('#recipes').DataTable();
 </script>
 </body>
-</html><?php
+</html>

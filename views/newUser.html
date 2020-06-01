@@ -22,13 +22,13 @@
 
                     <div class="col-sm-4">
                         <input class="form-control" type="text" name="firstName" id="firstName"
-                               value="{{@firstName}}">
+                               value="<check if='{{ !empty(@firstName) }}'>{{ @firstName }}</check>">
                     </div>
                     <span class="err">
-                                            <check if="{{ isset(@errors['firstName']) }}">
-                                                {{ @errors['firstName'] }}
-                                            </check>
-                                        </span>
+                        <check if="{{ isset(@errors['firstName']) }}">
+                            {{ @errors['firstName'] }}
+                        </check>
+                    </span>
                 </div>
 
                 <div class="form-group">
@@ -36,13 +36,13 @@
 
                     <div class="col-sm-4">
                         <input class="form-control" type="text" name="lastName" id="lastName"
-                               value="{{@lastName}}">
+                               value="<check if='{{ !empty(@lastName) }}'>{{ @lastName }}</check>">
                     </div>
                     <span class="err">
-                                            <check if="{{ isset(@errors['lastName']) }}">
-                                                {{ @errors['lastName'] }}
-                                            </check>
-                                        </span>
+                        <check if="{{ isset(@errors['lastName']) }}">
+                            {{ @errors['lastName'] }}
+                        </check>
+                    </span>
                 </div>
 
                 <div class="form-group">
@@ -50,13 +50,13 @@
 
                     <div class="col-sm-4">
                         <input class="form-control" type="text" name="email" id="email"
-                               value="{{@email}}">
+                               value="<check if='{{ !empty(@email) }}'>{{ @email }}</check>">
                     </div>
                     <span class="err">
-                                            <check if="{{ isset(@errors['email']) }}">
-                                                {{ @errors['email'] }}
-                                            </check>
-                                        </span>
+                        <check if="{{ isset(@errors['email']) }}">
+                            {{ @errors['email'] }}
+                        </check>
+                    </span>
                 </div>
 
                 <div class="form-group">
@@ -64,13 +64,13 @@
 
                     <div class="col-sm-4">
                         <input class="form-control" type="text" name="phone" id="phone"
-                               value="{{@phone}}">
+                               value="<check if='{{ !empty(@phone) }}'>{{ @phone }}</check>">
                     </div>
                     <span class="err">
-                                            <check if="{{ isset(@errors['phone']) }}">
-                                                {{ @errors['phone'] }}
-                                            </check>
-                                        </span>
+                        <check if="{{ isset(@errors['phone']) }}">
+                            {{ @errors['phone'] }}
+                        </check>
+                    </span>
                 </div>
 
             </div>
@@ -80,28 +80,38 @@
 
                     <div class="col-sm-4">
                         <input class="form-control" type="text" name="username" id="username"
-                               value="{{@username}}">
+                               value="<check if='{{ !empty(@username) }}'>{{ @username }}</check>">
                     </div>
                     <span class="err">
-                                            <check if="{{ isset(@errors['username']) }}">
-                                                {{ @errors['username'] }}
-                                            </check>
-                                        </span>
+                        <check if="{{ isset(@errors['username']) }}">
+                            {{ @errors['username'] }}
+                        </check>
+                    </span>
                 </div>
 
                 <div class="form-group">
-                    <label for="firstName" class="col-sm-2 control-label">Password</label>
+                    <label for="password" class="col-sm-2 control-label">Password</label>
 
                     <div class="col-sm-4">
                         <input class="form-control" type="text" name="password" id="password"
-                               value="{{@password}}">
+                               value="<check if='{{ !empty(@password) }}'>{{ @password }}</check>">
                     </div>
                     <span class="err">
-                                            <check if="{{ isset(@errors['password']) }}">
-                                                {{ @errors['password'] }}
-                                            </check>
-                                        </span>
+                        <check if="{{ isset(@errors['password']) }}">
+                            {{ @errors['password'] }}
+                        </check>
+                    </span>
                 </div>
+            </div>
+        </div>
+        <div class="col-xs-3 ">
+            <button type="submit" class="btn btn-primary float-right">Submit</button>
+        </div>
+    </form>
+</div>
+<include href="includes/footer.html"></include>
+</body>
+</html>
                 <!--                <div class="form-group">-->
                 <!--                    <label for="userId" class="col-sm-2 control-label">Userid</label>-->
 
@@ -132,14 +142,3 @@
                 <!--            </div>-->
 
 
-                <div class="col-xs-3 ">
-                    <button type="submit" class="btn btn-primary float-right">Submit</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
-
-<include href="includes/footer.html"></include>
-</body>
-</html>
