@@ -29,10 +29,6 @@ class User
         $this->_password=$password;
     }
 
-
-
-
-
     /**
      * @return mixed
      */

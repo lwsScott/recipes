@@ -191,7 +191,7 @@ class RecipeController
         $valid = true;
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            if (!validName($_POST['firstName'])) {
+            if (!$this->_validator->validName($_POST['firstName'])) {
 
                 //Set an error variable in the F3 hive
                 $valid = false;
@@ -200,7 +200,7 @@ class RecipeController
 
             }
 
-            if (!validName($_POST['lastName'])) {
+            if (!$this->_validator->validName($_POST['lastName'])) {
 
                 //Set an error variable in the F3 hive
                 $valid = false;
@@ -208,13 +208,13 @@ class RecipeController
                 echo "last name not done";
 
             }
-            if (!validPhone($_POST['phone'])) {
+            if (!$this->_validator->validPhone($_POST['phone'])) {
                 $valid = false;
                 $this->_f3->set('errors["phone"]', "must be a number");
                 echo "phone not done";
 
             }
-            if (!validEmail($_POST['email'])) {
+            if (!$this->_validator->validEmail($_POST['email'])) {
                 $valid = false;
                 //Set an error variable in the F3 hive
                 $this->_f3->set('errors["email"]', "must be a correct format");

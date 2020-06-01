@@ -6,8 +6,7 @@ error_reporting(E_ALL);
 //Require the autoload file
 require_once 'vendor/autoload.php';
 //require_once 'model/data-layer.php';
-require_once 'model/validation-functions.php';
-require_once("model/validate.php");
+//require_once("model/validate.php");
 // start session
 session_start();
 
@@ -25,7 +24,7 @@ $f3->set('DEBUG', 3);
 $db = new Database();
 
 // construct a new validator
-$validator = new Validate();
+$validator = new ValidateRecipes();
 
 // create a new controller
 $controller = new RecipeController($f3, $validator);
@@ -115,7 +114,6 @@ $f3->route('GET|POST /newUser', function () use ($f3) {
     ('views/newUser.html');
 
 });
-
 
 
 //Run fat free
