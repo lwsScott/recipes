@@ -75,6 +75,9 @@ class Database
         echo '<h1>I made it to database addRecipe with valid data</h1>';
         //var_dump($recipe);
 
+        var_dump($_SESSION);
+        //$userId = $_SESSION['userId']['0'];
+        //echo $userId;
         //1. Define the query
         // remove the image for now TODO fix
         $sql = "INSERT INTO recipes (recipeName, ingredients, directions, description)
@@ -93,6 +96,8 @@ class Database
         $statement->bindParam(':ingredients', $ing, PDO::PARAM_STR);
         $statement->bindParam(':directions', $dir, PDO::PARAM_STR);
         $statement->bindParam(':description', $desc, PDO::PARAM_STR);
+        //$statement->bindParam(':userId', $userId, PDO::PARAM_STR);
+
         //$statement->bindParam(':image', $recipe->getImage());
 
         //4. Execute the statement
@@ -122,6 +127,28 @@ class Database
 
         //5. Get the result
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    /*
+ * The user's database
+ */
+    function getUserId($username, $password)
+    {
+        //1. Define the query
+        $sql = "SELECT userId FROM users
+                WHERE username = 'lewis' && password = 'Password01'";
+
+        //2. Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3. Bind the parameters
+
+        //4. Execute the statement
+        $statement->execute();
+
+        //5. Get the result
+        $result = $statement->fetch();
         return $result;
     }
 

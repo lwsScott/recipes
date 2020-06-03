@@ -60,6 +60,18 @@ $f3->route('GET|POST /submitRecipe', function () {
     $GLOBALS['controller']->submitRecipe();
 });
 
+// the check login page
+$f3->route('GET|POST /check_login', function () {
+    echo '<h1>I made it to check login</h1>';
+    $GLOBALS['controller']->checkLogin();
+});
+
+// the login page
+$f3->route('GET|POST /login', function () {
+    //echo '<h1>I made it to login</h1>';
+    $GLOBALS['controller']->login();
+});
+
 // the admin page
 $f3->route('GET|POST /admin', function () {
     //echo '<h1>Initial home page check</h1>';
@@ -87,9 +99,9 @@ $f3->route('GET|POST /newUser', function ($f3) {
 */
 
 //Define a route that displays student detail
-$f3->route('GET|POST /viewUser', function(){
+$f3->route('GET|POST /viewUsers', function(){
 
-    $GLOBALS['controller']->viewUser();
+    $GLOBALS['controller']->viewUsers();
 });
 
 // new user submit page route

@@ -84,75 +84,139 @@ class RecipeController
      */
     public function submitRecipe()
     {
+        // TODO check login
+        //if (!isset($_SESSION['userId'])) {
+        //    $_SESSION["page"] = $_SERVER["SCRIPT_URI"];
+        //    $this->_f3->reroute('check_login');
+        //}
+        //var_dump( $_SESSION["page"]);
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            //echo '<h1>I made it here in the controller post method</h1>';
+        //echo '<h1>I made it here in the controller post method</h1>';
 
-            // validate the data and set hive variables
-            $valid = true;
-            //var_dump($_POST);
-            // validate name
-            if (!$this->_validator->validName($_POST['name'])) {
-                $valid = false;
-                $this->_f3->set('errors["name"]', "Please provide a recipe name");
-            } else {
-                $this->_f3->set('selectedName', $_POST['name']);
-            }
-
-            // validate ingredients
-            if (!$this->_validator->validIngredients($_POST['ingredients'])) {
-                $valid = false;
-                $this->_f3->set('errors["ingredients"]', "Please provide the ingredients");
-            } else {
-                $this->_f3->set('selectedIngredients', $_POST['ingredients']);
-            }
-
-            // validate directions
-            if (!$this->_validator->validDirections($_POST['directions'])) {
-                $valid = false;
-                $this->_f3->set('errors["directions"]', "Please provide the directions");
-            } else {
-                $this->_f3->set('selectedDirections', $_POST['directions']);
-            }
-
-            // validate description
-            if (!$this->_validator->validDescription($_POST['description'])) {
-                $valid = false;
-                $this->_f3->set('errors["description"]', "Please provide the description");
-            } else {
-                $this->_f3->set('selectedDescription', $_POST['description']);
-            }
-
-            //echo $valid;
-            // if valid data
-            if ($valid) {
-                //echo '<h1>I made it here with valid data</h1>';
-
-                $recipeName = $_POST['name'];
-                $ingredients = $_POST['ingredients'];
-                $directions = $_POST['directions'];
-                $description = $_POST['description'];
-                //$image = $_POST['image'];
-                $image = "";
-                //$submitter = $_POST['submitter'];
-                $submitter = "";
-                // construct a recipe object
-                $recipe = new Recipe($recipeName, $ingredients, $directions, $description, $image, $submitter);
-                //var_dump($recipe);
-                // add the recipe to the database
-                $GLOBALS['db']->addRecipe($recipe);
-                $this->_f3->reroute('recipes');
-
-            }
-            else {
-                $view = new Template();
-                echo $view->render
-                ('views/submitRecipe');
-            }
+        // validate the data and set hive variables
+        $valid = true;
+        //var_dump($_POST);
+        // validate name
+        if (!$this->_validator->validName($_POST['name'])) {
+            $valid = false;
+            $this->_f3->set('errors["name"]', "Please provide a recipe name");
         } else {
+            $this->_f3->set('selectedName', $_POST['name']);
+        }
+
+        // validate ingredients
+        if (!$this->_validator->validIngredients($_POST['ingredients'])) {
+            $valid = false;
+            $this->_f3->set('errors["ingredients"]', "Please provide the ingredients");
+        } else {
+            $this->_f3->set('selectedIngredients', $_POST['ingredients']);
+        }
+
+        // validate directions
+        if (!$this->_validator->validDirections($_POST['directions'])) {
+            $valid = false;
+            $this->_f3->set('errors["directions"]', "Please provide the directions");
+        } else {
+            $this->_f3->set('selectedDirections', $_POST['directions']);
+        }
+
+        // validate description
+        if (!$this->_validator->validDescription($_POST['description'])) {
+            $valid = false;
+            $this->_f3->set('errors["description"]', "Please provide the description");
+        } else {
+            $this->_f3->set('selectedDescription', $_POST['description']);
+        }
+
+        //echo $valid;
+        // if valid data
+        if ($valid) {
+            //echo '<h1>I made it here with valid data</h1>';
+
+            $recipeName = $_POST['name'];
+            $ingredients = $_POST['ingredients'];
+            $directions = $_POST['directions'];
+            $description = $_POST['description'];
+            //$image = $_POST['image'];
+            $image = "";
+            //$submitter = $_POST['submitter'];
+            $submitter = "";
+            // construct a recipe object
+            $recipe = new Recipe($recipeName, $ingredients, $directions, $description, $image, $submitter);
+            //var_dump($recipe);
+            // add the recipe to the database
+            $GLOBALS['db']->addRecipe($recipe);
+            $this->_f3->reroute('recipes');
+
+        }
+        else {
             $view = new Template();
             echo $view->render
-            ('views/submitRecipe.html');
+            ('views/submitRecipe');
         }
+    } else {
+        $view = new Template();
+        echo $view->render
+        ('views/submitRecipe.html');
+    }
+    }
+
+    /**
+     *  Provides a check for login
+     */
+    public function checkLogin()
+    {
+        echo "made it here to the check login page";
+
+    }
+
+    /**
+     *  Provides a user form to submit a recipe
+     */
+    public function login()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // initialize variables
+            $username = "";
+            $err = false;
+            echo "made it to the post method on login";
+
+            // if the form has been submitted
+            if (!empty($_POST)) {
+                // Get the username and password
+                $username = $_POST['username'];
+                $password = $_POST['password'];
+
+                // get the userId of the user from the database
+                $userId = $GLOBALS['db']->getUserId($username, $password);
+                var_dump($userId);
+                echo "Here";
+                $_SESSION['userId'] = $userId;
+                var_dump($_SESSION["page"]);
+                // Dummy variables
+                // TODO edit this to draw username and password from database
+                // get the userId from the database
+                //$user = 'myuser';
+                //$pass = 'password';
+                if (!empty($userId)) {
+                    // store username in the session array
+                    // TODO store the userId in the session
+                    $_SESSION['userId'] = $userId;
+
+                    // redirect user to index.php
+                    $page = isset($_SESSION['page']) ? $_SESSION['page'] : "index.php";
+                    header("location: " . $page);
+                } else {
+                    // set error flag to true
+                    $err = true;
+                }
+            }
+
+        }
+
+        $view = new Template();
+        echo $view->render
+        ('views/login.php');
     }
 
     /**
@@ -177,7 +241,7 @@ class RecipeController
     /**
      *
      */
-    public function viewUser()
+    public function viewUsers()
     {
 //        $result = $GLOBALS['db']->getRecipes();
 //
@@ -258,11 +322,11 @@ class RecipeController
 
 
                 // add into it
-                $newUser = new user($firstName, $lastName, $email, $phone,
+                $newUser = new User($firstName, $lastName, $email, $phone,
                     $username, $password);
                 //var_dump($newUser);
                 $GLOBALS['db']->writeUser($newUser);
-                $this->_f3->reroute('viewUser');
+                $this->_f3->reroute('viewUsers');
 
             }
         }
