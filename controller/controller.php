@@ -89,8 +89,7 @@ class RecipeController
 
             // validate the data and set hive variables
             $valid = true;
-            var_dump($_POST);
-            //echo $valid;
+            //var_dump($_POST);
             // validate name
             if (!$this->_validator->validName($_POST['name'])) {
                 $valid = false;
@@ -259,7 +258,7 @@ class RecipeController
 
 
                 // add into it
-                $newUser = new User($firstName, $lastName, $email, $phone,
+                $newUser = new user($firstName, $lastName, $email, $phone,
                     $username, $password);
                 //var_dump($newUser);
                 $GLOBALS['db']->writeUser($newUser);

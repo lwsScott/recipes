@@ -57,13 +57,7 @@ $f3->route('GET|POST /recipes/@recipeId', function ($f3, $params) {
 // the submit recipe page
 $f3->route('GET|POST /submitRecipe', function () {
     //echo '<h1>I made it here</h1>';
-
     $GLOBALS['controller']->submitRecipe();
-
-    //$view = new Template();
-    //echo $view->render
-    //('views/submitRecipe.html');
-
 });
 
 // the admin page
@@ -100,7 +94,7 @@ $f3->route('GET|POST /viewUser', function(){
 
 // new user submit page route
 $f3->route('GET|POST /newUser', function () {
-    echo '<h1>I made it here</h1>';
+    //echo '<h1>I made it here</h1>';
     $GLOBALS['controller']->newUser();
 //    $f3->set('firstName', $_POST['firstName']);
 //    $f3->set('lastName', $_POST['lastName']);
@@ -113,7 +107,6 @@ $f3->route('GET|POST /newUser', function () {
     $view = new Template();
     echo $view->render
     ('views/newUser.html');
-
 });
 
 
