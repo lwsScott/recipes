@@ -1,6 +1,6 @@
 <?php
 
-class SubmitUser extends user
+class PremiumUser extends User
 {
     // submit user fields
     private $_permission;
@@ -11,7 +11,7 @@ class SubmitUser extends user
         // call the parent constructor
         parent::__construct($first, $last, $email, $phone, $username, $password);
 
-        $this->_permission = 'submit';
+        $this->_permission = 'upload';
     }
 
     /**

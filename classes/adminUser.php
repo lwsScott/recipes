@@ -1,6 +1,6 @@
 <?php
 
-class AdminUser extends user
+class AdminUser extends User
 {
     // submit user fields
     private $_permission;
