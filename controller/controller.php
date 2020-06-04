@@ -85,10 +85,13 @@ class RecipeController
     public function submitRecipe()
     {
         // TODO check login
-        //if (!isset($_SESSION['userId'])) {
-        //    $_SESSION["page"] = $_SERVER["SCRIPT_URI"];
-        //    $this->_f3->reroute('check_login');
-        //}
+        if (!isset($_SESSION['userId'])) {
+            $_SESSION["page"] = $_SERVER["SCRIPT_URI"];
+            $this->_f3->reroute('login');
+        }
+        $userId = $_SESSION['userId'];
+        //echo $userId;
+
         //var_dump( $_SESSION["page"]);
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         //echo '<h1>I made it here in the controller post method</h1>';
@@ -137,13 +140,14 @@ class RecipeController
             $ingredients = $_POST['ingredients'];
             $directions = $_POST['directions'];
             $description = $_POST['description'];
+            $userId = $_SESSION['userId'];
             //$image = $_POST['image'];
             $image = "";
             //$submitter = $_POST['submitter'];
             $submitter = "";
             // construct a recipe object
-            $recipe = new Recipe($recipeName, $ingredients, $directions, $description, $image, $submitter);
-            //var_dump($recipe);
+            $recipe = new Recipe($recipeName, $ingredients, $directions, $description, $image, $userId);
+            var_dump($recipe);
             // add the recipe to the database
             $GLOBALS['db']->addRecipe($recipe);
             $this->_f3->reroute('recipes');
@@ -152,7 +156,7 @@ class RecipeController
         else {
             $view = new Template();
             echo $view->render
-            ('views/submitRecipe');
+            ('views/submitRecipe.html');
         }
     } else {
         $view = new Template();
@@ -171,7 +175,7 @@ class RecipeController
     }
 
     /**
-     *  Provides a user form to submit a recipe
+     *  Provides a login form and validates
      */
     public function login()
     {
@@ -179,7 +183,7 @@ class RecipeController
             // initialize variables
             $username = "";
             $err = false;
-            echo "made it to the post method on login";
+            echo "made it to the post method on login<br>";
 
             // if the form has been submitted
             if (!empty($_POST)) {
@@ -189,10 +193,14 @@ class RecipeController
 
                 // get the userId of the user from the database
                 $userId = $GLOBALS['db']->getUserId($username, $password);
+
+
                 var_dump($userId);
-                echo "Here";
+                echo "<br>";
+                echo "Here<br>";
                 $_SESSION['userId'] = $userId;
                 var_dump($_SESSION["page"]);
+
                 // Dummy variables
                 // TODO edit this to draw username and password from database
                 // get the userId from the database
@@ -218,6 +226,17 @@ class RecipeController
         echo $view->render
         ('views/login.php');
     }
+
+    /**
+     *  Provides a logout form and validates
+     */
+    public function logout()
+    {
+        $view = new Template();
+        echo $view->render
+        ('views/logout.php');
+    }
+
 
     /**
      *  Display a summary of results submitted

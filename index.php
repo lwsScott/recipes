@@ -60,10 +60,9 @@ $f3->route('GET|POST /submitRecipe', function () {
     $GLOBALS['controller']->submitRecipe();
 });
 
-// the check login page
-$f3->route('GET|POST /check_login', function () {
-    echo '<h1>I made it to check login</h1>';
-    $GLOBALS['controller']->checkLogin();
+// the logout
+$f3->route('GET|POST /logout', function () {
+    $GLOBALS['controller']->logout();
 });
 
 // the login page
