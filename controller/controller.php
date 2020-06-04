@@ -42,23 +42,6 @@ class RecipeController
         // display the recipes page
         $view = new Template();
         echo $view->render('views/recipes.php');
-        /*
-        foreach ($result as $row)
-        {
-            echo "<tr>";
-            echo "<td>" . $row['recipeName'] . "</td>";
-            echo "<td>" . $row['userId'] . "</td>";
-            echo "<td>" . $row['description'] . "</td>";
-            echo "</tr>";
-        }
-        */
-        /*
-        foreach ($result as $row) {
-            echo "<p>" . $row['recipeName'] . ", " . $row['ingredients'] . ", " .
-                $row['directions'] . ", " . $row['description'] . ", " . $row['userId'] .
-                ", " . $row['recipeId'] . "</p>";
-        }
-        */
     }
 
     /**
@@ -84,7 +67,9 @@ class RecipeController
      */
     public function submitRecipe()
     {
-        // TODO check login
+        // check if the user is logged in
+        // redirect to login page if not
+        // user will be redirected back after logging in
         if (!isset($_SESSION['userId'])) {
             $_SESSION["page"] = $_SERVER["SCRIPT_URI"];
             $this->_f3->reroute('login');
@@ -183,39 +168,33 @@ class RecipeController
             // initialize variables
             $username = "";
             $err = false;
-            echo "made it to the post method on login<br>";
+            //echo "made it to the post method on login<br>";
 
             // if the form has been submitted
             if (!empty($_POST)) {
                 // Get the username and password
                 $username = $_POST['username'];
                 $password = $_POST['password'];
+                $_SESSION['username'] = $username;
 
                 // get the userId of the user from the database
+                // and set the session variable
                 $userId = $GLOBALS['db']->getUserId($username, $password);
 
-
-                var_dump($userId);
-                echo "<br>";
-                echo "Here<br>";
-                $_SESSION['userId'] = $userId;
-                var_dump($_SESSION["page"]);
-
-                // Dummy variables
                 // TODO edit this to draw username and password from database
                 // get the userId from the database
                 //$user = 'myuser';
                 //$pass = 'password';
-                if (!empty($userId)) {
-                    // store username in the session array
-                    // TODO store the userId in the session
+                if (!empty($userId) && $userId > 0) {
+                    // store userId in the session array
                     $_SESSION['userId'] = $userId;
 
-                    // redirect user to index.php
+                    // redirect user to either the page they came from or index.php
                     $page = isset($_SESSION['page']) ? $_SESSION['page'] : "index.php";
                     header("location: " . $page);
                 } else {
                     // set error flag to true
+                    $_SESSION['err'] = true;
                     $err = true;
                 }
             }
@@ -228,7 +207,7 @@ class RecipeController
     }
 
     /**
-     *  Provides a logout form and validates
+     *  Provides a logout form
      */
     public function logout()
     {
@@ -262,14 +241,6 @@ class RecipeController
      */
     public function viewUsers()
     {
-//        $result = $GLOBALS['db']->getRecipes();
-//
-//        //var_dump($result);
-//        $f3->set('results', $result);
-//
-//        $view = new Template();
-//        echo $view->render('views/recipes.php');
-
         $users = $GLOBALS['db']->getUser();
         $this->_f3->set('users', $users);
         $template = new Template();
@@ -295,40 +266,42 @@ class RecipeController
                 //Set an error variable in the F3 hive
                 $valid = false;
                 $this->_f3->set('errors["lastName"]', "cant be empty");
-                echo "last name not done";
+                //echo "last name not done";
 
             }
             if (!$this->_validator->validPhone($_POST['phone'])) {
                 $valid = false;
                 $this->_f3->set('errors["phone"]', "must be a number");
-                echo "phone not done";
+                //echo "phone not done";
 
             }
             if (!$this->_validator->validEmail($_POST['email'])) {
                 $valid = false;
                 //Set an error variable in the F3 hive
                 $this->_f3->set('errors["email"]', "must be a correct format");
-                echo "email false";
+                //echo "email false";
             }
 
             if ($_POST['username'] == "") {
                 $valid = false;
                 //Set an error variable in the F3 hive
                 $this->_f3->set('errors["username"]', "cant be empty");
-                echo "username false";
+                //echo "username false";
             }
             if ($_POST['password'] == "") {
                 $valid = false;
                 //Set an error variable in the F3 hive
                 $this->_f3->set('errors["password"]', "cant be empty");
-                echo "password false";
+                //echo "password false";
             }
-            if ($valid) {
-                echo "Finish validation";
+
+            // check if premium user selected
+            if (isset($_POST['membership'])) {
+                $this->_f3->set('membership', $_POST['membership']);
             }
 
             if ($valid) {
-                echo "start store datebase";
+                //echo "start store datebase";
                 $firstName = $_POST['firstName'];
 
                 //echo $firstName;
@@ -339,10 +312,19 @@ class RecipeController
                 $username = $_POST['username'];
                 $password = $_POST['password'];
 
+                // create the user object
+                // premium user if selected, standard user if not selected
+                if (isset($_POST['membership'])) {
+                    $newUser = new PremiumUser($firstName, $lastName, $email, $phone,
+                        $username, $password);
+                }
+                else {
+                    $newUser = new User($firstName, $lastName, $email, $phone,
+                        $username, $password);
+                }
 
                 // add into it
-                $newUser = new User($firstName, $lastName, $email, $phone,
-                    $username, $password);
+
                 //var_dump($newUser);
                 $GLOBALS['db']->writeUser($newUser);
                 $this->_f3->reroute('viewUsers');

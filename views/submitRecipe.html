@@ -39,8 +39,8 @@
 
                 <!-- get ingredients -->
                 <div class="form-group">
-                    <h3>Add Ingredients</h3>
-                    <p>One ingredient per line</p>
+                    <h2>Add Ingredients</h2>
+                    <h3>One ingredient per line</h3>
                     <label for="ingredients">Ingredients:</label>
                     <textarea type="text" class="form-control" id="ingredients"name="ingredients" placeholder="Ingredient"><check if='{{ !empty(@selectedIngredients) }}'>{{ @selectedIngredients }}</check></textarea>
                     <span class="err">
@@ -52,8 +52,8 @@
 
                 <!-- get directions -->
                 <div class="form-group">
-                    <h3>Add Directions</h3>
-                    <p>One direction per line</p>
+                    <h2>Add Directions</h2>
+                    <h3>One direction per line</h3>
                     <label for="directions">Directions:</label>
                     <textarea type="text" class="form-control" id="directions"name="directions" placeholder="Directions"><check if='{{ !empty(@selectedDirections) }}'>{{ @selectedDirections }}</check></textarea>
                     <span class="err">
@@ -65,8 +65,8 @@
 
                 <!-- get description -->
                 <div class="form-group">
-                    <h3>Add Description</h3>
-                    <label for="description">Ingredients:</label>
+                    <h2>Add Description</h2>
+                    <label for="description">Description:</label>
                     <textarea type="text" class="form-control" id="description"name="description" placeholder="Description"><check if='{{ !empty(@selectedDescription) }}'>{{ @selectedDescription }}</check></textarea>
                     <span class="err">
                         <check if="{{ isset(@errors['description']) }}">

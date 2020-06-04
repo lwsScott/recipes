@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-lg-7">
 
-                <!-- get food -->
+                <!-- get names -->
                 <div class="form-group">
                     <label for="firstName" class="col-sm-2 control-label">FirstName</label>
 
@@ -45,6 +45,7 @@
                     </span>
                 </div>
 
+                <!-- get email -->
                 <div class="form-group">
                     <label for="email" class="col-sm-2 control-label">Email</label>
 
@@ -59,6 +60,7 @@
                     </span>
                 </div>
 
+                <!-- get phone -->
                 <div class="form-group">
                     <label for="phone" class="col-sm-2 control-label">phone Number</label>
 
@@ -72,8 +74,9 @@
                         </check>
                     </span>
                 </div>
-
             </div>
+
+            <!-- get username -->
             <div class="col-lg-5">
                 <div class="form-group">
                     <label for="username" class="col-sm-2 control-label">Username</label>
@@ -89,6 +92,7 @@
                     </span>
                 </div>
 
+                <!-- get password -->
                 <div class="form-group">
                     <label for="password" class="col-sm-2 control-label">Password</label>
 
@@ -103,6 +107,19 @@
                     </span>
                 </div>
             </div>
+
+            <!-- Premium membership -->
+            <div class="form-group">
+                <label><strong>Premium User</strong></label>
+                <br>
+                <input type="checkbox" name="membership" id=membership
+                    <check if='{{ isset(@membership) }}'>
+                        checked="checked"
+                    </check>>
+                </input>
+                <label for="membership">Sign me up for a Premium Account!</label>
+            </div>
+
         </div>
         <div class="col-xs-3 ">
             <button type="submit" class="btn btn-primary float-right">Submit</button>

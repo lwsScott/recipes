@@ -135,7 +135,7 @@ class Database
  */
     function getUserId($username, $password)
     {
-        echo $username . "and" . $password. "<br>";
+        //echo $username . "and" . $password. "<br>";
 
         //1. Define the query
         $sql = "SELECT userId FROM users
@@ -143,7 +143,7 @@ class Database
 
         //2. Prepare the statement
         $statement = $this->_dbh->prepare($sql);
-        var_dump($statement);
+        //var_dump($statement);
         //3. Bind the parameters
 
         //4. Execute the statement
@@ -151,11 +151,15 @@ class Database
 
         //5. Get the result
         $result = $statement->fetchColumn();
-        var_dump($result);
+        //var_dump($result);
         //foreach ($result as $row) {
         //    echo $row;
         //}
-        return $result;
+        if ($result) {
+            return $result;
+        } else {
+            return "Incorrect login credentials provided";
+        }
     }
 
     function writeUser($newUser)
