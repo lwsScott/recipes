@@ -39,13 +39,16 @@ error_reporting(E_ALL);
 </div>
 <!--
 <a href='new-student.php?sid=$sid'-->
-
-
 <include href="includes/footer.html"></include>
+
 <!-- add data table scripts -->
+<script src="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script>
     $('#recipes').DataTable();
 </script>
+
+
 </body>
-</html><?php
+</html>
+
