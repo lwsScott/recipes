@@ -282,23 +282,38 @@ class RecipeController
                 //echo "email false";
             }
 
-            if ($_POST['username'] == "") {
+            if (!$this->_validator->validName($_POST['username'])) {
                 $valid = false;
                 //Set an error variable in the F3 hive
                 $this->_f3->set('errors["username"]', "cant be empty");
                 //echo "username false";
             }
-            if ($_POST['password'] == "") {
+            if (!$this->_validator->validName($_POST['password'])) {
                 $valid = false;
                 //Set an error variable in the F3 hive
                 $this->_f3->set('errors["password"]', "cant be empty");
                 //echo "password false";
+            }
+            if ($_POST['password'] != $_POST['confirm']) {
+                $valid = false;
+                //Set an error variable in the F3 hive
+                $this->_f3->set('errors["confirm"]', "need the same as password");
+                echo "confirm password false";
             }
 
             // check if premium user selected
             if (isset($_POST['membership'])) {
                 $this->_f3->set('membership', $_POST['membership']);
             }
+
+            // make the form stick
+            $this->_f3->set('firstName', $_POST['firstName']);
+            $this->_f3->set('lastName', $_POST['lastName']);
+            $this->_f3->set('phone', $_POST['phone']);
+            $this->_f3->set('email', $_POST['email']);
+            $this->_f3->set('username', $_POST['username']);
+            $this->_f3->set('password', $_POST['password']);
+            $this->_f3->set('confirm', $_POST['confirm']);
 
             if ($valid) {
                 //echo "start store datebase";
