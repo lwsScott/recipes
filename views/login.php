@@ -16,18 +16,15 @@
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" class="form-control" id="username" name="username"
-            value="<?php echo $username; ?>">
+                   value="<check if='{{ isset(@SESSION.username) }}'>{{ @SESSION.username }}</check>">
         </div>
         <div class="form-group">
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" name="password" >
         </div>
-        <?php
-        if ($err)
-        {
-            echo '<span class="err">Incorrect login</span><br>';
-        }
-        ?>
+        <check if="{{ isset(@SESSION.err) }}">
+            <span class="err">Incorrect login</span><br>
+        </check>
         <button type="submit" class="btn btn-primary">Login</button>
     </form>
 
