@@ -6,18 +6,26 @@ class Recipe
     private $_ingredients;
     private $_directions;
     private $_description;
-    private $_image;
+    private $_imageId;
     private $_submitter;
 
     // constructor
-    function __construct($name, $ingredients, $directions, $description, $image, $submitter)
+    function __construct($name, $ingredients, $directions, $description, $imageId, $submitter)
     {
         $this->_name = $name;
         $this->_ingredients = $ingredients;
         $this->_directions = $directions;
         $this->_description = $description;
-        $this->_image = $image;
+        $this->_imageId = $imageId;
         $this->_submitter = $submitter;
+    }
+
+    /**
+     * @param mixed $imageId
+     */
+    public function setImageId($imageId)
+    {
+        $this->_imageId = $imageId;
     }
 
     /**
@@ -63,9 +71,9 @@ class Recipe
     /**
      * @return mixed
      */
-    public function getImage()
+    public function getImageId()
     {
-        return $this->_image;
+        return $this->_imageId;
     }
 
     public function toString()

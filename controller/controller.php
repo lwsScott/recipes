@@ -127,15 +127,23 @@ class RecipeController
             $description = $_POST['description'];
             $userId = $_SESSION['userId'];
             //$image = $_POST['image'];
-            $image = "";
+            $imageId = "";
             //$submitter = $_POST['submitter'];
             $submitter = "";
             // construct a recipe object
-            $recipe = new Recipe($recipeName, $ingredients, $directions, $description, $image, $userId);
-            var_dump($recipe);
+            $recipe = new Recipe($recipeName, $ingredients, $directions, $description, $imageId, $userId);
+            //var_dump($recipe);
+            $_SESSION['recipe'] = $recipe;
             // add the recipe to the database
             $GLOBALS['db']->addRecipe($recipe);
-            $this->_f3->reroute('recipes');
+            //Redirect to the interests route if premium member
+            if (($_SESSION['permission']) == "upload") {
+                $this->_f3->reroute("image");
+            }
+            else {
+                //redirect to summary page
+                $this->_f3->reroute('recipes');
+            }
 
         }
         else {
@@ -148,6 +156,99 @@ class RecipeController
         echo $view->render
         ('views/submitRecipe.html');
     }
+    }
+
+    /**
+     * Display the profile image route
+     * establish database connection and store image
+     * to a folder and its filename to a database if chosen
+     * route to summary
+     */
+    public function image()
+    {
+        try {
+            //Create a new PDO connection
+            $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            //echo "Connected!";
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+        //echo "here in the controller image";
+        $dirName = '../uploader/uploads/';
+        // store the directory name in the session
+        $_SESSION['dirName'] = $dirName;
+        //$target_file = $dirName . basename($_FILES["fileToUpload"]["name"]);
+        //$uploadOk = 1;
+        //echo realpath("test.txt");
+        //echo $dirName;
+        //var_dump($_FILES['fileToUpload']);
+
+        //If file has been submitted
+        if (isset($_FILES['fileToUpload'])) {
+
+            $file = $_FILES['fileToUpload'];
+            //$_SESSION['member']->setImageId($file['name']);
+
+            //echo $file['name'].'<br>';
+            //echo $file['type'].'<br>';
+            //echo $file['tmp_name'].'<br>';
+            //echo $file['error'].'<br>';
+            //echo $file['size'].'<br>';
+
+            // 264.JPG
+            // image/jpeg
+            // /tmp/phpCSZfKz
+            // 0
+            // 2632637
+
+            //Define valid file types
+            $validTypes = array('image/jpeg', 'image/jpg', 'image/png');
+
+            //Check file size - 3 MB maximum
+            if ($_SERVER['CONTENT_LENGTH'] > 3000000) {
+                echo "<p class='error'>File is too large. Maximum file size is 3 MB.</p>";
+            } //Check file type
+            else if (in_array($file['type'], $validTypes)) {
+
+                if ($file['error'] > 0)
+                    echo "<p class='error'>Return Code: {$file['error']}</p>";
+
+                //Check for duplicate file
+                if (file_exists($dirName . $file['name'])) {
+                    echo "<p class='error'>Error uploading: ";
+                    echo $file['name'] . " already exists.</p>";
+                } else {
+                    //Move file to upload directory
+                    move_uploaded_file($file['tmp_name'], $dirName . $file['name']);
+                    echo "<p class='success'>Uploaded {$file['name']} successfully!</p> ";
+
+                    // store the file name in the database
+                    $sql = "INSERT INTO uploads(filename) VALUES ('{$file['name']}')";
+                    $dbh->exec($sql);
+
+                    // establish the $id number of the last insert
+                    $id = $dbh->lastInsertId();
+                    $_SESSION['imageId'] = $id;
+                    $_SESSION['recipe']->setImageId($id);
+
+                    // now write the imageId to the recipe database
+                    $GLOBALS['db']->addImage($_SESSION['recipe']);
+                    //redirect to image page
+                    $this->_f3->reroute('recipes');
+
+                }
+            }
+            //Invalid file type
+            else {
+                echo "<p class='error'>Invalid file type. Allowed types: gif, jpg, png</p>";
+            }
+        }
+
+        $view = new Template();
+        //var_dump($view);
+        echo $view->render('views/imageUpload.php');
     }
 
     /**
@@ -188,6 +289,10 @@ class RecipeController
                 if (!empty($userId) && $userId > 0) {
                     // store userId in the session array
                     $_SESSION['userId'] = $userId;
+
+                    // get the user permission
+                    $permission = $GLOBALS['db']->getPermission($userId);
+                    $_SESSION['permission'] = $permission;
 
                     // redirect user to either the page they came from or index.php
                     $page = isset($_SESSION['page']) ? $_SESSION['page'] : "index.php";
@@ -258,7 +363,6 @@ class RecipeController
                 $valid = false;
                 $this->_f3->set('errors["firstName"]', "cant be empty");
                 echo "firstname no done";
-
             }
 
             if (!$this->_validator->validName($_POST['lastName'])) {
@@ -267,14 +371,14 @@ class RecipeController
                 $valid = false;
                 $this->_f3->set('errors["lastName"]', "cant be empty");
                 //echo "last name not done";
-
             }
+
             if (!$this->_validator->validPhone($_POST['phone'])) {
                 $valid = false;
                 $this->_f3->set('errors["phone"]', "must be a number");
                 //echo "phone not done";
-
             }
+
             if (!$this->_validator->validEmail($_POST['email'])) {
                 $valid = false;
                 //Set an error variable in the F3 hive
@@ -288,12 +392,14 @@ class RecipeController
                 $this->_f3->set('errors["username"]', "cant be empty");
                 //echo "username false";
             }
+
             if (!$this->_validator->validName($_POST['password'])) {
                 $valid = false;
                 //Set an error variable in the F3 hive
                 $this->_f3->set('errors["password"]', "cant be empty");
                 //echo "password false";
             }
+
             if ($_POST['password'] != $_POST['confirm']) {
                 $valid = false;
                 //Set an error variable in the F3 hive
@@ -304,6 +410,7 @@ class RecipeController
             // check if premium user selected
             if (isset($_POST['membership'])) {
                 $this->_f3->set('membership', $_POST['membership']);
+                $permission = 'upload';
             }
 
             // make the form stick
@@ -331,7 +438,7 @@ class RecipeController
                 // premium user if selected, standard user if not selected
                 if (isset($_POST['membership'])) {
                     $newUser = new PremiumUser($firstName, $lastName, $email, $phone,
-                        $username, $password);
+                        $username, $password, $permission);
                 }
                 else {
                     $newUser = new User($firstName, $lastName, $email, $phone,
@@ -339,7 +446,6 @@ class RecipeController
                 }
 
                 // add into it
-
                 //var_dump($newUser);
                 $GLOBALS['db']->writeUser($newUser);
                 $this->_f3->reroute('viewUsers');

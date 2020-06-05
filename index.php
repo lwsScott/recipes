@@ -71,6 +71,12 @@ $f3->route('GET|POST /login', function () {
     $GLOBALS['controller']->login();
 });
 
+// the upload image page
+$f3->route('GET|POST /image', function () {
+    //echo '<h1>I made it to login</h1>';
+    $GLOBALS['controller']->image();
+});
+
 // the admin page
 $f3->route('GET|POST /admin', function () {
     //echo '<h1>Initial home page check</h1>';

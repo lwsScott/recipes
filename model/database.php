@@ -105,8 +105,36 @@ class Database
         echo "Result: " . $result;
 
         //Get the key of the last inserted row
-        $id = $this->_dbh->lastInsertId();
+        $recipeId = $this->_dbh->lastInsertId();
+        $_SESSION['recipeId'] = $recipeId;
         //echo $id;
+    }
+
+    function addImage($recipe)
+    {
+        $userId = $recipe->getSubmitter();
+        //1. Define the query
+        // remove the image for now TODO fix
+        $sql = "UPDATE recipes SET imageId = (:imageId) 
+                WHERE recipeId = (:recipeId)";
+
+        var_dump($sql);
+        //2. Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+        //$image = $recipe->getImageId();
+        $imageId = $recipe->getImageId();
+        $recipeId = $_SESSION['recipeId'];
+
+        //3. Bind the parameters
+        $statement->bindParam(':imageId', $imageId);
+        $statement->bindParam(':recipeId', $recipeId);
+
+        //4. Execute the statement
+        $result = $statement->execute();
+        echo "Result: " . $result;
+
+        //Get the key of the last inserted row
+        $recipeId = $this->_dbh->lastInsertId();
     }
 
     /*
@@ -131,8 +159,8 @@ class Database
     }
 
     /*
- * The user's database
- */
+     * Get the User ID given a username and password
+     */
     function getUserId($username, $password)
     {
         //echo $username . "and" . $password. "<br>";
@@ -162,15 +190,47 @@ class Database
         }
     }
 
+    /*
+ * Get the User ID given a username and password
+ */
+    function getPermission($userId)
+    {
+        //echo $username . "and" . $password. "<br>";
+
+        //1. Define the query
+        $sql = "SELECT permission FROM users
+                WHERE userId = '$userId'";
+
+        //2. Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+        //var_dump($statement);
+        //3. Bind the parameters
+
+        //4. Execute the statement
+        $statement->execute();
+
+        //5. Get the result
+        $result = $statement->fetchColumn();
+        //var_dump($result);
+        //foreach ($result as $row) {
+        //    echo $row;
+        //}
+        if ($result) {
+            return $result;
+        } else {
+            return "Incorrect userId provided";
+        }
+    }
+
     function writeUser($newUser)
     {
         echo '<h1>database php called</h1>';
 
         //1. Define the query
         $sql = "INSERT INTO users (firstname, lastname, email,
-                phone, username, password)
+                phone, username, password, permission)
                 VALUES (:firstname, :lastname, :email, :phone,
-                        :username, :password)";
+                        :username, :password, :permission)";
 
         //2. Prepare the statement
         $statement = $this->_dbh->prepare($sql);
@@ -182,6 +242,7 @@ class Database
         $phone = $newUser->getPhone();
         $userName = $newUser->getUsername();
         $password = $newUser->getPassword();
+        $permission = $newUser->getPermission();
 
         //3. Bind the parameters
         // $statement->bindParam(':sid', $user->get());
@@ -191,6 +252,8 @@ class Database
         $statement->bindParam(':phone', $phone, PDO::PARAM_STR);
         $statement->bindParam(':username', $userName, PDO::PARAM_STR);
         $statement->bindParam(':password', $password, PDO::PARAM_STR);
+        $statement->bindParam(':permission', $permission, PDO::PARAM_STR);
+
 
         //4. Execute the statement
         $statement->execute();
