@@ -356,6 +356,7 @@ class RecipeController
     {
         $valid = true;
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            var_dump($_POST['password']);
 
             if (!$this->_validator->validName($_POST['firstName'])) {
 
@@ -393,10 +394,17 @@ class RecipeController
                 //echo "username false";
             }
 
+            if (isset($_SESSION['nameAvail'])) {
+                $valid = false;
+                //Set an error variable in the F3 hive
+                $this->_f3->set('errors["username"]', "Username not available");
+                //echo "username false";
+            }
+
             if (!$this->_validator->validName($_POST['password'])) {
                 $valid = false;
                 //Set an error variable in the F3 hive
-                $this->_f3->set('errors["password"]', "cant be empty");
+                $this->_f3->set('errors["password"]', "Required");
                 //echo "password false";
             }
 
@@ -412,8 +420,8 @@ class RecipeController
                 $this->_f3->set('membership', $_POST['membership']);
                 $permission = 'upload';
             }
-            echo "I made it here";
-            var_dump($valid);
+            //echo "I made it here";
+            //var_dump($valid);
 
             // make the form stick
             $this->_f3->set('firstName', $_POST['firstName']);

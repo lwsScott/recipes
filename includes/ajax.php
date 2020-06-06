@@ -16,6 +16,7 @@ if(isset($_POST['username'])){
 
         if($count > 0){
             $response = "<span style='color: red;'>Not Available.</span>";
+            $_SESSION['nameAvail'] = "Username is not available";
         }
 
     }

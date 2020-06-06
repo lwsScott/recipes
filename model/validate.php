@@ -28,36 +28,21 @@ class ValidateRecipes
     function validName($name)
     {
         $name = str_replace(' ', '', $name);
-        return !empty($name) && ctype_alpha($name);
+        return !empty($name);
     }
-    function validPhone($phone){
-        if(is_numeric($phone)){
-            return true;
-        }
-        else{
-            return false;
-        }
+
+    // validate phone number either 10 digits or 3-3-4 digits
+    function validPhone($phoneNum)
+    {
+        //echo $phoneNum;
+        return (preg_match("/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/", $phoneNum) ||
+            preg_match("/^[0-9]{10}$/", $phoneNum));
     }
-    function validAge($age){
-        if ($age>18 && $age<118){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
+
     function validEmail($email){
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return true;
         }else{
-            return false;
-        }
-    }
-    function validInterest($interest){
-        if(isset($interest)){
-            return true;
-        }
-        else{
             return false;
         }
     }

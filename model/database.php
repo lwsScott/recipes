@@ -242,7 +242,9 @@ class Database
         $phone = $newUser->getPhone();
         $userName = $newUser->getUsername();
         $password = $newUser->getPassword();
-        $permission = $newUser->getPermission();
+        if (get_class($newUser) == 'PremiumUser') {
+            $permission = $newUser->getPermission();
+        }
 
         //3. Bind the parameters
         // $statement->bindParam(':sid', $user->get());
