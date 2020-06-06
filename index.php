@@ -123,6 +123,18 @@ $f3->route('GET|POST /newUser', function () {
 //    $f3->set('perId', $_POST['perId']);
 });
 
+// view detail users
+$f3->route('GET|POST /users/@userId', function ($f3,$params) {
+    // accept param
+    $userId=$f3->get('PARAMS.userId');
+
+    $f3->set('userId',$userId);
+
+
+    $GLOBALS['controller']->userDetail($f3);
+
+
+});
 
 //Run fat free
 // -> runs class method instance method
