@@ -263,4 +263,28 @@ class Database
         //Get the key of the last inserted row
         $id = $this->_dbh->lastInsertId();
     }
+
+    /*
+     * Show the user detail in another pages
+     */
+    function getUserDetails($userId)
+    {
+        //1. Define the query
+        $sql = "SELECT * 
+                FROM users
+                WHERE userId = $userId";
+
+        //2. Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3. Bind the parameters
+        $statement->bindParam(':userId', $userId);
+
+        //4. Execute the statement
+        $statement->execute();
+
+        //5. Get the result
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
 }
