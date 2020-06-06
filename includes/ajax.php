@@ -1,6 +1,14 @@
 <?php
 
-require '/home2/lscottgr/db.php';
+if ($_SERVER['USER'] == 'lscottgr')
+{
+    require_once '/home2/lscottgr/db.php';
+}
+
+else if ($_SERVER['USER'] == 'qzhanggr')
+{
+    require_once '/home2/qzhanggr/db.php';
+}
 
 if(isset($_POST['username'])){
     $username = $_POST['username'];
