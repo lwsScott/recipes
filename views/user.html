@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UserDetail</title>
+    <include href="includes/header.html"></include>
+</head>
+<body>
+<include href="includes/navBar.html"></include>
+
+<!-- display the recipe -->
+<p class="card mb-0 ml-3 mt-3 p-2">UserId: {{ $results['userId'] }}</p>
+<p class="card mb-0 ml-3 mt-3 p-2">firstName: {{ $results['firstname'] }}</p>
+<p class="card mb-0 ml-3 mt-3 p-2">lastName: {{ $results['lastname'] }}</p>
+<p class="card mb-0 ml-3 mt-3 p-2">email: {{ $results['email'] }}</p>
+<p class="card mb-0 ml-3 mt-3 p-2">phone: {{ $results['phone'] }}</p>
+<p class="card mb-0 ml-3 mt-3 p-2">username: {{ $results['username'] }}</p>
+
+
+
+<include href="includes/footer.html"></include>
+<!-- add data table scripts -->
+<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script>
+    $('#recipes').DataTable();
+</script>
+</body>
+</html>

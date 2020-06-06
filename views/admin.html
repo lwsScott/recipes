@@ -3,11 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin Page</title>
+    <link rel="stylesheet" href="styles/styles.css">
     <include href="includes/header.html"></include>
+
 </head>
 <body>
 <include href="includes/navBar.html"></include>
+<div class="container">
+    <div class="jumbotron text-center">
+        <h1>Here is Admin pages</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <a href="recipes"><img class="img" src="images/admin1.jpg"></a>
+            <p>click to view recipes</p>
+            <a href="submitRecipe"><img class="img" src="images/recipe2.jpg"></a>
+            <p>click to add recipes</p>
+        </div>
+        <div class="col-lg-4">
+            <a href="newUser"><img class="img" src="images/user1.jpg"></a>
+            <p>click to add user</p>
+            <a href="viewUsers"><img class="img" src="images/user2.jpg"></a>
+            <p>click to view User</p>
+        </div>
+        <div class="col-lg-4">
+            <a href="logout"><img class="img" src="images/logout.jpg"></a>
+            <p>click to logout</p>
+            <a href="login"><img class="img" src="images/login.jpg"></a>
+            <p>click to login</p>
+        </div>
 
+
+    </div>
+
+</div>
 
 <include href="includes/footer.html"></include>
 </body>

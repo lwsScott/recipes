@@ -21,25 +21,18 @@ error_reporting(E_ALL);
         <thead>
         <tr>
             <th>User id</th>
-            <th>first name</th>
-            <th>lastName</th>
-            <th>email</th>
-            <th>Phone</th>
             <th>Username</th>
-            <th>Password</th>
+
         </tr>
         </thead>
 
         <repeat group="{{ @users }}" value="{{ @row }}">
             <tr>
 
-                <td> {{ $row['userId'] }} </td>
-                <td> {{ $row['firstname'] }}</td>
-                <td> {{ $row['lastname'] }} </td>
-                <td> {{ $row['email'] }} </td>
-                <td> {{ $row['phone'] }} </td>
+                <td><a href="users/{{$row['userId']}}"> {{ $row['userId'] }} </td>
+
                 <td> {{ $row['username'] }} </td>
-                <td> {{ $row['password'] }} </td>
+
             </tr>
         </repeat>
 
@@ -48,7 +41,7 @@ error_reporting(E_ALL);
     </table>
 
 
-<a href="newUser">Add new User</a>
+    <a href="newUser">Add new User</a>
 </div>
 
 
