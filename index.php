@@ -121,9 +121,6 @@ $f3->route('GET|POST /newUser', function () {
 //    $f3->set('password', $_POST['password']);
 //    $f3->set('userId', $_POST['userId']);
 //    $f3->set('perId', $_POST['perId']);
-    $view = new Template();
-    echo $view->render
-    ('views/newUser.html');
 });
 
 

@@ -362,7 +362,7 @@ class RecipeController
                 //Set an error variable in the F3 hive
                 $valid = false;
                 $this->_f3->set('errors["firstName"]', "cant be empty");
-                echo "firstname no done";
+                //echo "firstname no done";
             }
 
             if (!$this->_validator->validName($_POST['lastName'])) {
@@ -404,7 +404,7 @@ class RecipeController
                 $valid = false;
                 //Set an error variable in the F3 hive
                 $this->_f3->set('errors["confirm"]', "need the same as password");
-                echo "confirm password false";
+                //echo "confirm password false";
             }
 
             // check if premium user selected
@@ -412,6 +412,8 @@ class RecipeController
                 $this->_f3->set('membership', $_POST['membership']);
                 $permission = 'upload';
             }
+            echo "I made it here";
+            var_dump($valid);
 
             // make the form stick
             $this->_f3->set('firstName', $_POST['firstName']);
@@ -423,6 +425,8 @@ class RecipeController
             $this->_f3->set('confirm', $_POST['confirm']);
 
             if ($valid) {
+                //echo "I made it here valid";
+
                 //echo "start store datebase";
                 $firstName = $_POST['firstName'];
 
@@ -449,13 +453,10 @@ class RecipeController
                 //var_dump($newUser);
                 $GLOBALS['db']->writeUser($newUser);
                 $this->_f3->reroute('viewUsers');
-
             }
         }
-        else {
-            $view = new Template();
-            echo $view->render
-            ('views/newUser.html');
-        }
+        $view = new Template();
+        echo $view->render
+        ('views/newUser.html');
     }
 }
