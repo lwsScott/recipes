@@ -1,14 +1,17 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+    <!-- Header  -->
+    <include href="includes/header.html"></include>
 </head>
 <body>
-<div class="container">
+<!-- Navbar -->
+<include href="includes/navBar.html"></include>
+<div class="container card rounded">
 
     <h1>Login Page</h1>
 
@@ -29,10 +32,8 @@
     </form>
 
 </div>
+<include href="includes/footer.html"></include>
 
-<script src="//code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 </body>
 </html>
