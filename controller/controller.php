@@ -467,4 +467,21 @@ class RecipeController
         echo $view->render
         ('views/newUser.html');
     }
+
+    /*
+     *  display individual user
+     */
+    public function userDetail()
+    {
+        //echo $this->_f3->get('userId');
+
+        $result = $GLOBALS['db']->getUserDetails($this->_f3->get('userId'));
+
+        //var_dump($result);
+        $this->_f3->set('results', $result);
+
+
+        $view = new Template();
+        echo $view->render('views/user.html');
+    }
 }
