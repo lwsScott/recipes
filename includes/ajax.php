@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 if ($_SERVER['USER'] == 'lscottgr')
 {
     require_once '/home2/lscottgr/db.php';
@@ -25,6 +25,9 @@ if(isset($_POST['username'])){
         if($count > 0){
             $response = "<span style='color: red;'>Not Available.</span>";
             $_SESSION['nameAvail'] = "Username is not available";
+        }
+        else {
+            $_SESSION['nameAvail'] = "available";
         }
 
     }
