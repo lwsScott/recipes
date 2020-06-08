@@ -8,3 +8,7 @@
 .hidden {
     visibility: hidden;
 }
+.errJ {
+    color: orange;
+    visibility: hidden;
+}
