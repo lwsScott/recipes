@@ -5,6 +5,7 @@
     <title>New User</title>
     <link rel="stylesheet" href="styles/styles.css">
     <include href="includes/header.html"></include>
+
 </head>
 <body>
 <!--Add User page-->
@@ -12,110 +13,117 @@
 <include href="includes/navBar.html"></include>
 <div class="container card rounded">
     <h1>New User</h1>
-    <form action="#" method="post" class="form-horizontal">
+    <form id="af" action="#" method="post" class="form-horizontal">
         <div class="row">
             <div class="col-7">
                 <fieldset class="form-group">
 
-                <!-- get names -->
-                <div class="form-group">
-                    <label for="firstName"><strong>FirstName</strong></label>
-                     <input class="form-control" type="text" name="firstName" id="firstName"
+                    <!-- get names -->
+                    <div class="form-group">
+                        <label for="firstName"><strong>FirstName</strong></label>
+                        <input class="form-control" type="text" name="firstName" id="firstName"
                                value="<check if='{{ !empty(@firstName) }}'>{{ @firstName }}</check>">
-                    <span class="err">
+                        <span class="err">
                         <check if="{{ isset(@errors['firstName']) }}">
                             {{ @errors['firstName'] }}
                         </check>
                     </span>
-                </div>
+                        <span class="errJ" id="errFirst">Can not be empty </span>
+                    </div>
 
-                <div class="form-group">
-                    <label for="lastName"><strong>LastName</strong></label>
-                     <input class="form-control" type="text" name="lastName" id="lastName"
+                    <div class="form-group">
+                        <label for="lastName"><strong>LastName</strong></label>
+                        <input class="form-control" type="text" name="lastName" id="lastName"
                                value="<check if='{{ !empty(@lastName) }}'>{{ @lastName }}</check>">
-                    <span class="err">
+                        <span class="err">
                         <check if="{{ isset(@errors['lastName']) }}">
                             {{ @errors['lastName'] }}
                         </check>
                     </span>
-                </div>
+                        <span class="errJ" id="errlast">Can not be empty </span>
+                    </div>
 
-                <!-- get email -->
-                <div class="form-group">
-                    <label for="email"><strong>Email</strong></label>
+                    <!-- get email -->
+                    <div class="form-group">
+                        <label for="email"><strong>Email</strong></label>
                         <input class="form-control" type="text" name="email" id="email"
                                value="<check if='{{ !empty(@email) }}'>{{ @email }}</check>"
-                        placeholder="@mail.com">
-                    <span class="err">
+                               placeholder="@mail.com">
+                        <span class="err">
                         <check if="{{ isset(@errors['email']) }}">
                             {{ @errors['email'] }}
                         </check>
                     </span>
-                </div>
+                        <span class="errJ" id="errEmail">Must correct email format </span>
+                    </div>
 
-                <!-- get phone -->
-                <div class="form-group">
-                    <label for="phone"><strong>Phone Number</strong></label>
-                     <input class="form-control" type="text" name="phone" id="phone"
+                    <!-- get phone -->
+                    <div class="form-group">
+                        <label for="phone"><strong>Phone Number</strong></label>
+                        <input class="form-control" type="text" name="phone" id="phone"
                                value="<check if='{{ !empty(@phone) }}'>{{ @phone }}</check>"
-                        placeholder="2062532999">
-                    <span class="err">
+                               placeholder="2062532999">
+                        <span class="err">
                         <check if="{{ isset(@errors['phone']) }}">
                             {{ @errors['phone'] }}
                         </check>
                     </span>
-                </div>
+                        <span class="errJ" id="errPhone">Please number only </span>
+                    </div>
 
-            <!-- get username -->
-                <div class="form-group">
-                    <label for="username"><strong>Username</strong></label>
+                    <!-- get username -->
+                    <div class="form-group">
+                        <label for="username"><strong>Username</strong></label>
                         <input class="form-control" type="text" name="username" id="username"
                                value="<check if='{{ !empty(@username) }}'>{{ @username }}</check>">
-                    <!-- Response -->
-                    <div id="uname_response" ></div>
-                    <span class="err">
+                        <!-- Response -->
+                        <div id="uname_response"></div>
+                        <span class="err">
                         <check if="{{ isset(@errors['username']) }}">
                             {{ @errors['username'] }}
                         </check>
                     </span>
-                </div>
 
-                <!-- get password -->
-                <div class="form-group">
-                    <label for="password"><strong>Password</strong></label>
-                     <input class="form-control" type="password" name="password" id="password"
+                    </div>
+
+                    <!-- get password -->
+                    <div class="form-group">
+                        <label for="password"><strong>Password</strong></label>
+                        <input class="form-control" type="password" name="password" id="password"
                                value="<check if='{{ !empty(@password) }}'>{{ @password }}</check>">
-                    <span class="err">
+                        <span class="err">
                         <check if="{{ isset(@errors['password']) }}">
                             {{ @errors['password'] }}
                         </check>
                     </span>
-                </div>
+                        <span class="errJ" id="errPassword">Cant be empty </span>
+                    </div>
 
-                <!-- confirm password -->
-                <div class="form-group">
-                    <label for="confirm"><strong>Confirm Password</strong></label>
-                     <input class="form-control" type="password" name="confirm" id="confirm"
+                    <!-- confirm password -->
+                    <div class="form-group">
+                        <label for="confirm"><strong>Confirm Password</strong></label>
+                        <input class="form-control" type="password" name="confirm" id="confirm"
                                value="<check if='{{ !empty(@confirm) }}'>{{ @confirm }}</check>">
-                    <span class="err">
+                        <span class="err">
                         <check if="{{ isset(@errors['confirm']) }}">
                             {{ @errors['confirm'] }}
                         </check>
                     </span>
-                </div>
+                        <span class="errJ" id="errConfirm">Cant not match your password </span>
+                    </div>
 
-                <!-- Premium membership -->
-                <div class="form-group">
-                    <label><strong>Premium User</strong></label>
-                    <br>
-                    <input type="checkbox" name="membership" id=membership
-                    <check if='{{ isset(@membership) }}'>
-                        checked="checked"
-                    </check>
-                    >
-                    </input>
-                    <label for="membership">Sign me up for a Premium Account!</label>
-                </div>
+                    <!-- Premium membership -->
+                    <div class="form-group">
+                        <label><strong>Premium User</strong></label>
+                        <br>
+                        <input type="checkbox" name="membership" id=membership>
+                        <check if='{{ isset(@membership) }}'>
+                            checked="checked"
+                        </check>
+
+                        </input>
+                        <label for="membership">Sign me up for a Premium Account!</label>
+                    </div>
 
                 </fieldset>
             </div>
@@ -127,6 +135,7 @@
 
 <!-- check username availability -->
 <script src="js/ajaxUsername.js"></script>
+<script src="js/user.js"></script>
 </body>
 </html>
 
