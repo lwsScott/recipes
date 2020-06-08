@@ -51,11 +51,31 @@ class RecipeController
     {
         //echo "Here at view recipe" . $f3->get('recipeId');
         // get the details of the recipe from the database
-        $result = $GLOBALS['db']->getDetails($this->_f3->get('recipeId'));
+        $results = $GLOBALS['db']->getDetails($this->_f3->get('recipeId'));
 
-        var_dump($result);
+        //var_dump($results);
+        //echo "<br>";
         // set the hive variable to the recipe results
-        $this->_f3->set('results', $result);
+        $this->_f3->set('results', $results);
+
+        //var_dump($results['ingredients']);
+        //echo "<br>";
+        $ingArray = json_decode($results['ingredients']);
+        $this->_f3->set('ingArray', $ingArray);
+
+        //echo "<br>";
+        $dirArray = json_decode($results['directions']);
+        $this->_f3->set('dirArray', $dirArray);
+
+
+        $result = $GLOBALS['db']->getUserName( $results['userId']);
+        var_dump($result);
+        $firstname = $result['firstname'];
+        echo $firstname;
+        $this->_f3->set('firstname', $firstname);
+
+        $lastname = $result['lastname'];;
+        $this->_f3->set('lastname', $lastname);
 
         // display the individual recipe page
         $view = new Template();

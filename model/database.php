@@ -190,6 +190,33 @@ class Database
         }
     }
 
+    function getUserName($userId)
+    {
+        //1. Define the query
+        $sql = "SELECT firstname, lastname FROM users
+                WHERE userId = '$userId'";
+
+        //2. Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+        //var_dump($statement);
+        //3. Bind the parameters
+
+        //4. Execute the statement
+        $statement->execute();
+
+        //5. Get the result
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        var_dump($result);
+        //foreach ($result as $row) {
+        //    echo $row;
+        //}
+        if ($result) {
+            return $result;
+        } else {
+            return "Incorrect userId provided";
+        }
+    }
+
     /*
  * Get the User ID given a username and password
  */

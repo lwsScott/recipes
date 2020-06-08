@@ -11,10 +11,21 @@
 
 <!-- display the recipe -->
 <p class="card mb-0 ml-3 mt-3 p-2">Name: {{ $results['recipeName'] }}</p>
-<p class="card mb-0 ml-3 mt-3 p-2">Submitted by: {{ $results['userId'] }}</p>
+<p class="card mb-0 ml-3 mt-3 p-2">Submitted by: {{ @firstname }} {{ @lastname }}</p>
+
 <p class="card mb-0 ml-3 mt-3 p-2">Description: {{ $results['description'] }}</p>
-<p class="card mb-0 ml-3 mt-3 p-2">Ingredients: {{ $results['ingredients'] }}</p>
-<p class="card mb-0 ml-3 mt-3 p-2">Directions: {{ $results['directions'] }}</p>
+
+<ul class="card mb-0 ml-3 mt-3 p-2">Ingredients:
+    <repeat group="{{ @ingArray }}" value="{{ @ingredient }}">
+        <li class="card mb-0 ml-1 mt-1 p-1">{{ @ingredient }}</li>
+    </repeat>
+</ul>
+
+<ul class="card mb-0 ml-3 mt-3 p-2">Directions:
+    <repeat group="{{ @dirArray }}" value="{{ @direction }}">
+        <li class="card mb-0 ml-1 mt-1 p-1">{{ @direction }}</li>
+    </repeat>
+</ul>
 
 <include href="includes/footer.html"></include>
 <!-- add data table scripts -->
