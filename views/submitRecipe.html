@@ -18,6 +18,39 @@
         </div>
     </div>
 
+    <!-- Add Ingredients and display-->
+    <div class="form-group">
+        <label for="ingredient">Ingredient:</label>
+        <input id="ingredient" type="text" name="Inglist">
+        <button id="btnIng">Add an ingredient</button>
+    </div>
+    <div class="col-2-3">
+        <h5>Ingredient List</h5>
+        <ul id="ingList"></ul>
+    </div>
+    <span class="err">
+        <check if="{{ isset(@errors['ingredients']) }}">
+            <p>{{ @errors['ingredients'] }}</p>
+        </check>
+    </span>
+
+    <!-- Add Directions and display-->
+    <div class="form-group">
+        <label for="direction">Directions:</label>
+        <input id="direction" type="text" name="Dirlist">
+        <button id="btnDir">Add directions</button>
+    </div>
+    <div class="col-2-3">
+        <h5>Direction List</h5>
+        <ul id="dirList"></ul>
+    </div>
+    <span class="err">
+        <check if="{{ isset(@errors['directions']) }}">
+            <p>{{ @errors['directions'] }}</p>
+        </check>
+    </span>
+
+
     <form class="form-group" id="recipe" action="#" method="post">
 
     <div class="row m-1">
@@ -26,9 +59,8 @@
 
                 <!-- get recipe name -->
                 <div class="form-group">
-                    <h3>Add Recipe name</h3>
-                    <label for="name">Name:</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Recipe Name"
+                    <label for="recipeName">Recipe Name:</label>
+                    <input type="text" class="form-control" id="recipeName" name="recipeName" placeholder="Recipe Name"
                            value="<check if='{{ !empty(@selectedName) }}'>{{ @selectedName }}</check>">
                     <span class="err">
                         <check if="{{ isset(@errors['name']) }}">
@@ -37,37 +69,10 @@
                     </span>
                 </div>
 
-                <!-- get ingredients -->
-                <div class="form-group">
-                    <h2>Add Ingredients</h2>
-                    <h3>One ingredient per line</h3>
-                    <label for="ingredients">Ingredients:</label>
-                    <textarea type="text" class="form-control" id="ingredients"name="ingredients" placeholder="Ingredient"><check if='{{ !empty(@selectedIngredients) }}'>{{ @selectedIngredients }}</check></textarea>
-                    <span class="err">
-                        <check if="{{ isset(@errors['ingredients']) }}">
-                            <p>{{ @errors['ingredients'] }}</p>
-                        </check>
-                    </span>
-                </div>
-
-                <!-- get directions -->
-                <div class="form-group">
-                    <h2>Add Directions</h2>
-                    <h3>One direction per line</h3>
-                    <label for="directions">Directions:</label>
-                    <textarea type="text" class="form-control" id="directions"name="directions" placeholder="Directions"><check if='{{ !empty(@selectedDirections) }}'>{{ @selectedDirections }}</check></textarea>
-                    <span class="err">
-                        <check if="{{ isset(@errors['directions']) }}">
-                            <p>{{ @errors['directions'] }}</p>
-                        </check>
-                    </span>
-                </div>
-
                 <!-- get description -->
-                <div class="form-group">
-                    <h2>Add Description</h2>
+                <div>
                     <label for="description">Description:</label>
-                    <textarea type="text" class="form-control" id="description"name="description" placeholder="Description"><check if='{{ !empty(@selectedDescription) }}'>{{ @selectedDescription }}</check></textarea>
+                    <textarea type="text" class="form-control" id="description" name="description" placeholder="Description"><check if='{{ !empty(@selectedDescription) }}'>{{ @selectedDescription }}</check></textarea>
                     <span class="err">
                         <check if="{{ isset(@errors['description']) }}">
                             <p>{{ @errors['description'] }}</p>
@@ -75,10 +80,27 @@
                     </span>
                 </div>
 
+
+            <!-- get ingredients -->
+            <div class="form-group hidden">
+                <!-- <h2>Add Ingredients</h2>-->
+                <!-- <h3>One ingredient per line</h3>-->
+                <!-- <label for="ingredients">Ingredients:</label>-->
+                <input type="text" class="form-control hidden" id="ingredients" name="ingredients" placeholder="Ingredient">
+            </div>
+
+            <!-- get directions -->
+            <div class="form-group hidden">
+                <!-- <h2>Add Directions</h2>-->
+                <!-- <h3>One direction per line</h3>-->
+                <!-- <label for="directions">Directions:</label>-->
+                <input type="text" class="form-control hidden" id="directions" name="directions" placeholder="Directions">
+            </div>
+
             </fieldset>
         </div>
     </div>
-        <button id="btnIng" type="submit" class="btn-primary rounded">Submit Recipe</button>
+        <button id="btnSubmit" class="btn-primary rounded">Submit Recipe</button>
     </form>
 
 </div>

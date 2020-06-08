@@ -74,22 +74,41 @@ class RecipeController
             $_SESSION["page"] = $_SERVER["SCRIPT_URI"];
             $this->_f3->reroute('login');
         }
+
         $userId = $_SESSION['userId'];
         //echo $userId;
-
+        //var_dump($_SERVER['REQUEST_METHOD']);
+        //var_dump($_SESSION);
         //var_dump( $_SESSION["page"]);
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         //echo '<h1>I made it here in the controller post method</h1>';
+        //var_dump($_POST);
+        //$recipe = $_POST["recipe"];
+
+        //$tempArr = json_decode($recipe);
+        //$arr = array_values($tempArr);
+        //echo $arr[0]; echo $arr[1]; echo $arr[2];  //sends this back ["1","2"]["a","b"]test
+        //echo json_encode($arr[0]);  // returns this "[\"1\",\"2\"]"
+
+        // so we can now declare variable
+       // and break down our post variables
+        //$_POST['ingredients'] = $arr[0];
+        //$_POST['directions'] = $arr[1];
+        //$_POST['name'] = $arr[2];
+        //$_POST['description'] = $arr[3];
+        //echo $ing;
+        //echo $dir;
+        //echo $name;
 
         // validate the data and set hive variables
         $valid = true;
-        //var_dump($_POST);
+        var_dump($_POST);
         // validate name
-        if (!$this->_validator->validName($_POST['name'])) {
+        if (!$this->_validator->validName($_POST['recipeName'])) {
             $valid = false;
             $this->_f3->set('errors["name"]', "Please provide a recipe name");
         } else {
-            $this->_f3->set('selectedName', $_POST['name']);
+            $this->_f3->set('selectedName', $_POST['recipeName']);
         }
 
         // validate ingredients
@@ -121,7 +140,7 @@ class RecipeController
         if ($valid) {
             //echo '<h1>I made it here with valid data</h1>';
 
-            $recipeName = $_POST['name'];
+            $recipeName = $_POST['recipeName'];
             $ingredients = $_POST['ingredients'];
             $directions = $_POST['directions'];
             $description = $_POST['description'];
@@ -136,7 +155,7 @@ class RecipeController
             $_SESSION['recipe'] = $recipe;
             // add the recipe to the database
             $GLOBALS['db']->addRecipe($recipe);
-            //Redirect to the interests route if premium member
+                //Redirect to the interests route if premium member
             if (($_SESSION['permission']) == "upload") {
                 $this->_f3->reroute("image");
             }
@@ -356,8 +375,7 @@ class RecipeController
     {
         $valid = true;
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            var_dump($_POST['password']);
-
+            var_dump($_POST);
             if (!$this->_validator->validName($_POST['firstName'])) {
 
                 //Set an error variable in the F3 hive
@@ -393,8 +411,8 @@ class RecipeController
                 $this->_f3->set('errors["username"]', "cant be empty");
                 //echo "username false";
             }
-
-            if (isset($_SESSION['nameAvail'])) {
+            //echo $_SESSION['nameAvail'];
+            if (($_SESSION['nameAvail'] != 'available')) {
                 $valid = false;
                 //Set an error variable in the F3 hive
                 $this->_f3->set('errors["username"]', "Username not available");

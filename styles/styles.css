@@ -1,7 +1,10 @@
-.err {
++.err {
     color: darkred;
 }
 .img{
     height:200px;
     width: 250px;
+}
+.hidden {
+    visibility: hidden;
 }

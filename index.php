@@ -60,6 +60,12 @@ $f3->route('GET|POST /submitRecipe', function () {
     $GLOBALS['controller']->submitRecipe();
 });
 
+// the submit recipe page
+$f3->route('GET|POST /recipeSubmit', function () {
+    //echo '<h1>I made it here</h1>';
+    $GLOBALS['controller']->recipe();
+});
+
 // the logout
 $f3->route('GET|POST /logout', function () {
     $GLOBALS['controller']->logout();
