@@ -197,6 +197,35 @@ class Database
         }
     }
 
+    function getFileName($imageId)
+    {
+        //echo $username . "and" . $password. "<br>";
+
+        //1. Define the query
+        $sql = "SELECT filename FROM uploads
+                WHERE file_id = '$imageId'";
+
+        //2. Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+        //var_dump($statement);
+        //3. Bind the parameters
+
+        //4. Execute the statement
+        $statement->execute();
+
+        //5. Get the result
+        $result = $statement->fetchColumn();
+        //var_dump($result);
+        //foreach ($result as $row) {
+        //    echo $row;
+        //}
+        if ($result) {
+            return $result;
+        } else {
+            return "Incorrect imageId provided";
+        }
+    }
+
     function getUserName($userId)
     {
         //1. Define the query

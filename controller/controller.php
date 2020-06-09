@@ -68,11 +68,11 @@ class RecipeController
         $this->_f3->set('dirArray', $dirArray);
 
 
-        //$result = $GLOBALS['db']->getUserName($results['userId']);
+        $fileName = $GLOBALS['db']->getFileName($results['imageId']);
         //var_dump($result);
-        //$firstname = $result['firstName'];
+        //$fileName = $result['filename'];
         //echo $firstname;
-        //$this->_f3->set('firstname', $firstname);
+        $this->_f3->set('filename', $fileName);
 
         //$lastname = $result['lastName'];;
         //$this->_f3->set('lastname', $lastname);

@@ -10,8 +10,18 @@
 <include href="includes/navBar.html"></include>
 
 <!-- display the recipe -->
-<p class="card mb-0 ml-3 mt-3 p-2">Name: {{ $results['recipeName'] }}</p>
+<p class="card mb-0 ml-3 mt-3 p-2">Recipe: {{ $results['recipeName'] }}</p>
 <p class="card mb-0 ml-3 mt-3 p-2">Submitted by: {{ $results['firstName'] }} {{ $results['lastName'] }}</p>
+<!-- If Premium member has profile photo display that  -->
+<div class="col-6">
+    <check if="{{ !empty($results['imageId']) }}">
+        <true>
+            <img class="img-fluid rounded m-2 p-2" src="../../uploader/uploads/{{ @filename }}" alt="image">
+        </true>
+        <false>
+            <img class="img-fluid rounded m-2 p-2" src="images/homePageImage.png" alt="image">
+        </false>
+    </check>
 
 <p class="card mb-0 ml-3 mt-3 p-2">Description: {{ $results['description'] }}</p>
 
