@@ -7,17 +7,20 @@ class Recipe
     private $_directions;
     private $_description;
     private $_imageId;
-    private $_submitter;
+    private $_userId;
 
     // constructor
-    function __construct($name, $ingredients, $directions, $description, $imageId, $submitter)
+    function __construct($name, $ingredients, $directions, $description, $imageId, $userId, $firstName, $lastName)
     {
         $this->_name = $name;
         $this->_ingredients = $ingredients;
         $this->_directions = $directions;
         $this->_description = $description;
         $this->_imageId = $imageId;
-        $this->_submitter = $submitter;
+        $this->_userId = $userId;
+        $this->_firstName = $firstName;
+        $this->_lastName = $lastName;
+
     }
 
     /**
@@ -31,9 +34,25 @@ class Recipe
     /**
      * @return mixed
      */
-    public function getSubmitter()
+    public function getUserId()
     {
-        return $this->_submitter;
+        return $this->_userId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirstName()
+    {
+        return $this->_firstName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastName()
+    {
+        return $this->_lastName;
     }
 
     /**
