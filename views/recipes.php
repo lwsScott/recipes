@@ -29,7 +29,7 @@ error_reporting(E_ALL);
         <repeat group="{{ @results }}" value="{{ @row }}">
             <tr>
                 <td> <a href="recipes/{{ $row['recipeId'] }}"> {{ $row['recipeName'] }} </a></td>
-                <td> {{ $row['userId'] }} </td>
+                <td> {{ $row['firstName'] }} {{ $row['lastName'] }}</td>
                 <td> {{ $row['description'] }}</td>
             </tr>
         </repeat>

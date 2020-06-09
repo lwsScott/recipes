@@ -45,6 +45,7 @@ class Database
 
         //5. Get the result
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        //var_dump($result);
         return $result;
     }
 
@@ -80,9 +81,9 @@ class Database
         //echo $userId;
         //1. Define the query
         // remove the image for now TODO fix
-        $sql = "INSERT INTO recipes (recipeName, ingredients, directions, description, userId)
+        $sql = "INSERT INTO recipes (recipeName, ingredients, directions, description, userId, firstName, lastName)
                 VALUES (:recipeName, :ingredients, :directions,
-                        :description, :userId)";
+                        :description, :userId, :firstName, :lastName)";
         //var_dump($sql);
         //2. Prepare the statement
         $statement = $this->_dbh->prepare($sql);
@@ -91,12 +92,18 @@ class Database
         $ing = $recipe->getIngredients();
         $dir = $recipe->getDirections();
         $desc = $recipe->getDescription();
+        $first = $recipe->getFirstName();
+        $last = $recipe->getLastName();
+
         //3. Bind the parameters
         $statement->bindParam(':recipeName',$name, PDO::PARAM_STR);
         $statement->bindParam(':ingredients', $ing, PDO::PARAM_STR);
         $statement->bindParam(':directions', $dir, PDO::PARAM_STR);
         $statement->bindParam(':description', $desc, PDO::PARAM_STR);
         $statement->bindParam(':userId', $userId, PDO::PARAM_STR);
+        $statement->bindParam(':firstName', $first, PDO::PARAM_STR);
+        $statement->bindParam(':lastName', $last, PDO::PARAM_STR);
+
 
         //$statement->bindParam(':image', $recipe->getImage());
 
@@ -112,7 +119,7 @@ class Database
 
     function addImage($recipe)
     {
-        $userId = $recipe->getSubmitter();
+        $userId = $recipe->getUserId();
         //1. Define the query
         // remove the image for now TODO fix
         $sql = "UPDATE recipes SET imageId = (:imageId) 
@@ -206,7 +213,7 @@ class Database
 
         //5. Get the result
         $result = $statement->fetch(PDO::FETCH_ASSOC);
-        var_dump($result);
+        //var_dump($result);
         //foreach ($result as $row) {
         //    echo $row;
         //}

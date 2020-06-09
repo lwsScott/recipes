@@ -12,8 +12,8 @@
   $("#btnIng").on('click', function() {
 	  var add = $("#ingredient").val();
 
-	  if(ingredients.indexOf(add) == -1 )
-	  {
+	  if(ingredients.indexOf(add) == -1) {
+
 		  ingredients.push(add);
 		  ingredients.sort();
 	  }
@@ -36,8 +36,7 @@
   let JSONdirections;
   $("#btnDir").on('click', function() {
 	  var add = $("#direction").val();
-	  if(directions.indexOf(add) == -1 )
-	  {
+	  if(directions.indexOf(add) == -1 ) {
 		  directions.push(add);
 		  directions.sort();
 	  }

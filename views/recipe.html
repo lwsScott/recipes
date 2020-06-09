@@ -11,7 +11,7 @@
 
 <!-- display the recipe -->
 <p class="card mb-0 ml-3 mt-3 p-2">Name: {{ $results['recipeName'] }}</p>
-<p class="card mb-0 ml-3 mt-3 p-2">Submitted by: {{ @firstname }} {{ @lastname }}</p>
+<p class="card mb-0 ml-3 mt-3 p-2">Submitted by: {{ $results['firstName'] }} {{ $results['lastName'] }}</p>
 
 <p class="card mb-0 ml-3 mt-3 p-2">Description: {{ $results['description'] }}</p>
 

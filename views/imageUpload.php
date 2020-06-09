@@ -31,7 +31,7 @@
 <div class="container card rounded">
     <form>
         <p>Proceed without submitting photo</p>
-        <a href="summary" class="btn-primary float-right m-2">Next ></a>
+        <a href="recipes" class="btn-primary float-right m-2">Next ></a>
     </form>
 </div>
 

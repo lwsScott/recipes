@@ -68,14 +68,14 @@ class RecipeController
         $this->_f3->set('dirArray', $dirArray);
 
 
-        $result = $GLOBALS['db']->getUserName( $results['userId']);
-        var_dump($result);
-        $firstname = $result['firstname'];
-        echo $firstname;
-        $this->_f3->set('firstname', $firstname);
+        //$result = $GLOBALS['db']->getUserName($results['userId']);
+        //var_dump($result);
+        //$firstname = $result['firstName'];
+        //echo $firstname;
+        //$this->_f3->set('firstname', $firstname);
 
-        $lastname = $result['lastname'];;
-        $this->_f3->set('lastname', $lastname);
+        //$lastname = $result['lastName'];;
+        //$this->_f3->set('lastname', $lastname);
 
         // display the individual recipe page
         $view = new Template();
@@ -165,12 +165,22 @@ class RecipeController
             $directions = $_POST['directions'];
             $description = $_POST['description'];
             $userId = $_SESSION['userId'];
+
+            $result = $GLOBALS['db']->getUserName($userId);
+            //var_dump($result);
+            $firstname = $result['firstname'];
+            //echo $firstname;
+            $this->_f3->set('firstname', $firstname);
+
+            $lastname = $result['lastname'];;
+            $this->_f3->set('lastname', $lastname);
+
             //$image = $_POST['image'];
             $imageId = "";
             //$submitter = $_POST['submitter'];
             $submitter = "";
             // construct a recipe object
-            $recipe = new Recipe($recipeName, $ingredients, $directions, $description, $imageId, $userId);
+            $recipe = new Recipe($recipeName, $ingredients, $directions, $description, $imageId, $userId, $firstname, $lastname);
             //var_dump($recipe);
             $_SESSION['recipe'] = $recipe;
             // add the recipe to the database
