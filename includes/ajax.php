@@ -1,16 +1,13 @@
 <?php
 session_start();
-if ($_SERVER['USER'] == 'lscottgr')
-{
+if ($_SERVER['USER'] == 'lscottgr') {
     require_once '/home2/lscottgr/db.php';
 }
-
-else if ($_SERVER['USER'] == 'qzhanggr')
-{
+else if ($_SERVER['USER'] == 'qzhanggr') {
     require_once '/home2/qzhanggr/db.php';
 }
 
-if(isset($_POST['username'])){
+if(isset($_POST['username'])) {
     $username = $_POST['username'];
 
     $query = "select count(*) as cntUser from users where username='".$username."'";
@@ -29,7 +26,6 @@ if(isset($_POST['username'])){
         else {
             $_SESSION['nameAvail'] = "available";
         }
-
     }
     echo $response;
     die;
