@@ -56,7 +56,7 @@ class Database
         $sql = "SELECT * 
                 FROM recipes
                 WHERE recipeId = $recipeId";
-
+        //echo $sql;
         //2. Prepare the statement
         $statement = $this->_dbh->prepare($sql);
 

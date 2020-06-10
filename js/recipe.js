@@ -15,7 +15,7 @@
 	  if(ingredients.indexOf(add) == -1) {
 
 		  ingredients.push(add);
-		  ingredients.sort();
+		  //ingredients.sort();
 	  }
 
 	  $('#ingList').html("");
@@ -38,7 +38,7 @@
 	  var add = $("#direction").val();
 	  if(directions.indexOf(add) == -1 ) {
 		  directions.push(add);
-		  directions.sort();
+		  //directions.sort();
 	  }
 
 	  $('#dirList').html("");

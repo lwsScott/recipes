@@ -12,18 +12,14 @@
 <!-- display the recipe -->
 <p class="card mb-0 ml-3 mt-3 p-2">Recipe: {{ $results['recipeName'] }}</p>
 <p class="card mb-0 ml-3 mt-3 p-2">Submitted by: {{ $results['firstName'] }} {{ $results['lastName'] }}</p>
-<!-- If Premium member has profile photo display that  -->
-<div class="col-6">
-    <check if="{{ !empty($results['imageId']) }}">
-        <true>
-            <img class="img-fluid rounded m-2 p-2" src="../../uploader/uploads/{{ @filename }}" alt="image">
-        </true>
-        <false>
-            <img class="img-fluid rounded m-2 p-2" src="images/homePageImage.png" alt="image">
-        </false>
-    </check>
-
 <p class="card mb-0 ml-3 mt-3 p-2">Description: {{ $results['description'] }}</p>
+
+<!-- If recipe has photo display that  -->
+<check if="{{ !empty($results['imageId']) }}">
+    <true>
+        <img class="card img-fluid rounded m-2 p-2" src="../../uploader/uploads/{{ @filename }}" alt="image">
+    </true>
+</check>
 
 <ul class="card mb-0 ml-3 mt-3 p-2">Ingredients:
     <repeat group="{{ @ingArray }}" value="{{ @ingredient }}">
@@ -36,6 +32,12 @@
         <li class="card mb-0 ml-1 mt-1 p-1">{{ @direction }}</li>
     </repeat>
 </ul>
+
+
+<form action="{{ @BASE }}/recipes" method="get">
+    <button class="btn btn-primary text-center m-3" type="submit">Recipes</button>
+</form>
+<!--<a href="{{ @BASE }}/recipes" class="btn-primary float-left rounded m-2">Recipes</a>-->
 
 <include href="includes/footer.html"></include>
 <!-- add data table scripts -->

@@ -23,6 +23,26 @@ class RecipeController
      */
     public function home()
     {
+        // get the details of the recipe ONE from the database
+        $recipeOne = $GLOBALS['db']->getDetails('42');
+
+        // set the hive variable to the recipe ONE results
+        $this->_f3->set('recipeOne', $recipeOne);
+
+        // get the filename for image from the recipe and set it
+        $fileName = $GLOBALS['db']->getFileName($recipeOne['imageId']);
+        $this->_f3->set('filenameOne', $fileName);
+
+        // get the details of the recipe TWO from the database
+        $recipeTwo = $GLOBALS['db']->getDetails('43');
+
+        // set the hive variable to the recipe TWO results
+        $this->_f3->set('recipeTwo', $recipeTwo);
+
+        // get the filename for image from the recipe and set it
+        $fileName = $GLOBALS['db']->getFileName($recipeTwo['imageId']);
+        $this->_f3->set('filenameTwo', $fileName);
+
         $view = new Template();
         echo $view->render('views/home.html');
     }
