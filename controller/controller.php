@@ -24,7 +24,7 @@ class RecipeController
     public function home()
     {
         // get the details of the recipe ONE from the database
-        $recipeOne = $GLOBALS['db']->getDetails('42');
+        $recipeOne = $GLOBALS['db']->getDetails('43');
 
         // set the hive variable to the recipe ONE results
         $this->_f3->set('recipeOne', $recipeOne);
@@ -34,7 +34,7 @@ class RecipeController
         $this->_f3->set('filenameOne', $fileName);
 
         // get the details of the recipe TWO from the database
-        $recipeTwo = $GLOBALS['db']->getDetails('43');
+        $recipeTwo = $GLOBALS['db']->getDetails('44');
 
         // set the hive variable to the recipe TWO results
         $this->_f3->set('recipeTwo', $recipeTwo);
