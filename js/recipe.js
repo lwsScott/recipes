@@ -27,6 +27,8 @@
 
 	  // convert that array into a JSON string - puts quotes around the array
 	  JSONingredients = JSON.stringify(ingredients);
+
+	  // set the value of the form to carry the array within a string
 	  document.getElementById('ingredients').value = JSONingredients;
 	  //console.log(JSONingredients);
   });
@@ -50,6 +52,8 @@
 
 	  // convert that array into a JSON string - puts quotes around the array
 	  JSONdirections = JSON.stringify(directions);
+
+	  // set the value of the form to carry the array within a string
 	  document.getElementById('directions').value = JSONdirections;
 
 	  //console.log(JSONingredients);

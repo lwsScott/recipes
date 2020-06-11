@@ -28,7 +28,7 @@
         <h5>Ingredient List</h5>
         <ul id="ingList"></ul>
     </div>
-    <span class="err">
+    <span class="err" id="errIng">
         <check if="{{ isset(@errors['ingredients']) }}">
             <p>{{ @errors['ingredients'] }}</p>
         </check>
@@ -44,7 +44,7 @@
         <h5>Direction List</h5>
         <ul id="dirList"></ul>
     </div>
-    <span class="err">
+    <span class="err" id="errDir">
         <check if="{{ isset(@errors['directions']) }}">
             <p>{{ @errors['directions'] }}</p>
         </check>
@@ -62,7 +62,7 @@
                     <label for="recipeName">Recipe Name:</label>
                     <input type="text" class="form-control" id="recipeName" name="recipeName" placeholder="Recipe Name"
                            value="<check if='{{ !empty(@selectedName) }}'>{{ @selectedName }}</check>">
-                    <span class="err">
+                    <span class="err" id="errName">
                         <check if="{{ isset(@errors['name']) }}">
                             <p>{{ @errors['name'] }}</p>
                         </check>
@@ -73,7 +73,7 @@
                 <div>
                     <label for="description">Description:</label>
                     <textarea type="text" class="form-control" id="description" name="description" placeholder="Description"><check if='{{ !empty(@selectedDescription) }}'>{{ @selectedDescription }}</check></textarea>
-                    <span class="err">
+                    <span class="err" id="errDesc">
                         <check if="{{ isset(@errors['description']) }}">
                             <p>{{ @errors['description'] }}</p>
                         </check>
@@ -107,5 +107,6 @@
 
 <include href="includes/footer.html"></include>
 <script src="js/recipe.js"></script>
+<script src="js/clientSideValidation.js"></script>
 </body>
 </html>
