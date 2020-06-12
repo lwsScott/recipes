@@ -1,7 +1,22 @@
 <?php
+/*
+ * Controller page for recipe website
+ * provides routes to various views and runs fat free
+ * 5/30/20
+ * filename https://lscott.greenriverdev.com/328/recipes/controller/controller.php
+ * @author Lewis Scott
+ * @version 1.0
+ */
 
-/**
+/*
  * Class RecipeController
+ * routes and validates data
+ * interacts with the database object
+ * creates User, Premium User and recipe objects
+ * to carry information and display it
+ * 5/30/20
+ * @author Lewis Scott
+ * @version 1.0
  */
 class RecipeController
 {
@@ -87,7 +102,6 @@ class RecipeController
         $dirArray = json_decode($results['directions']);
         $this->_f3->set('dirArray', $dirArray);
 
-
         $fileName = $GLOBALS['db']->getFileName($results['imageId']);
         //var_dump($result);
         //$fileName = $result['filename'];
@@ -143,7 +157,7 @@ class RecipeController
         // validate the data and set hive variables
         $valid = true;
         var_dump($_POST);
-        // validate name
+        // validate recipe name
         if (!$this->_validator->validName($_POST['recipeName'])) {
             $valid = false;
             $this->_f3->set('errors["name"]', "Please provide a recipe name");
@@ -228,10 +242,10 @@ class RecipeController
     }
 
     /**
-     * Display the profile image route
+     * Display the recipe image route
      * establish database connection and store image
      * to a folder and its filename to a database if chosen
-     * route to summary
+     * route to recipes when complete
      */
     public function image()
     {
@@ -321,15 +335,6 @@ class RecipeController
     }
 
     /**
-     *  Provides a check for login
-     */
-    public function checkLogin()
-    {
-        echo "made it here to the check login page";
-
-    }
-
-    /**
      *  Provides a login form and validates
      */
     public function login()
@@ -351,7 +356,6 @@ class RecipeController
                 // and set the session variable
                 $userId = $GLOBALS['db']->getUserId($username, $password);
 
-                // TODO edit this to draw username and password from database
                 // get the userId from the database
                 //$user = 'myuser';
                 //$pass = 'password';
@@ -372,7 +376,6 @@ class RecipeController
                     $err = true;
                 }
             }
-
         }
 
         $view = new Template();
@@ -381,7 +384,7 @@ class RecipeController
     }
 
     /**
-     *  Provides a logout form
+     *  Logout function
      */
     public function logout()
     {
@@ -392,8 +395,8 @@ class RecipeController
 
 
     /**
-     *  Display a summary of results submitted
-     * TODO figure out how we want to confirm data
+     * TODO delete?
+     * Display a summary of results submitted
      * between users and recipes
      */
     public function summary()
@@ -406,12 +409,9 @@ class RecipeController
         session_destroy();
     }
 
-    /*
-     * view user and submit the user detail
-     */
 
     /**
-     *
+     * view users
      */
     public function viewUsers()
     {
@@ -421,6 +421,9 @@ class RecipeController
         echo $template->render('views/viewUser.php');
     }
 
+    /**
+     * insert a new User
+     */
     public function newUser()
     {
         $valid = true;
@@ -547,7 +550,6 @@ class RecipeController
 
         //var_dump($result);
         $this->_f3->set('results', $result);
-
 
         $view = new Template();
         echo $view->render('views/user.html');

@@ -18,13 +18,13 @@
         <!-- Featured Recipe One -->
         <div class="col-6">
             <!-- display the recipe -->
-            <p class="card mb-0 ml-3 mt-3 p-2">Recipe: {{ $recipeOne['recipeName'] }}</p>
+            <p class="card mb-0 ml-3 mt-3 p-2"><strong>{{ $recipeOne['recipeName'] }}</strong></p>
             <p class="card mb-0 ml-3 mt-3 p-2">Submitted by: {{ $recipeOne['firstName'] }} {{ $recipeOne['lastName'] }}</p>
-            <p class="card mb-0 ml-3 mt-3 p-2">Description: {{ $recipeOne['description'] }}</p>
+            <p class="card mb-0 ml-3 mt-3 p-2">{{ $recipeOne['description'] }}</p>
             <!-- If recipe has photo display that  -->
             <check if="{{ !empty($recipeOne['imageId']) }}">
                 <true>
-                    <img class="card img-fluid rounded m-2 p-2" src="../uploader/uploads/{{ @filenameOne }}" alt="image">
+                    <img class="img-fluid rounded m-2 p-2" src="../uploader/uploads/{{ @filenameOne }}" alt="image">
                 </true>
             </check>
         </div>
@@ -32,44 +32,44 @@
         <!-- Featured Recipe Two -->
         <div class="col-6">
             <!-- display the recipe -->
-            <p class="card mb-0 ml-3 mt-3 p-2">Recipe: {{ $recipeTwo['recipeName'] }}</p>
+            <p class="card mb-0 ml-3 mt-3 p-2"><strong>{{ $recipeTwo['recipeName'] }}</strong></p>
             <p class="card mb-0 ml-3 mt-3 p-2">Submitted by: {{ $recipeTwo['firstName'] }} {{ $recipeTwo['lastName'] }}</p>
-            <p class="card mb-0 ml-3 mt-3 p-2">Description: {{ $recipeTwo['description'] }}</p>
+            <p class="card mb-0 ml-3 mt-3 p-2">{{ $recipeTwo['description'] }}</p>
             <!-- If recipe has photo display that  -->
             <check if="{{ !empty($recipeTwo['imageId']) }}">
                 <true>
-                    <img class="card img-fluid rounded m-2 p-2" src="../uploader/uploads/{{ @filenameTwo }}" alt="image">
+                    <img class="img-fluid rounded m-2 p-2" src="../uploader/uploads/{{ @filenameTwo }}" alt="image">
                 </true>
             </check>
         </div>
-
     </div>
-
-    <!-- Row Two -->
-    <div class="row">
+</div>
+<!-- Row Two -->
+<div class="container">
+    <div class="btn-group" role="group">
         <!-- View recipes -->
-        <div class="col-6 text-center">
+        <div class="text-center">
             <form action="recipes" method="get">
                 <button class="btn btn-primary text-center m-3" type="submit">View Recipes</button>
             </form>
         </div>
 
         <!-- Request User Account-->
-        <div class="col-6 text-center">
+        <div class="text-center">
             <form action="newUser" method="get">
                 <button class="btn btn-primary text-center m-3" type="submit">Request User account</button>
             </form>
         </div>
 
         <!-- Submit Recipe -->
-        <div class="col-6 text-center">
+        <div class="text-center">
             <form action="submitRecipe" method="get">
                 <button class="btn btn-primary text-center m-3" type="submit">Submit Recipe</button>
             </form>
         </div>
 
         <!-- View Users -->
-        <div class="col-6 text-center">
+        <div class="text-center">
             <form action="viewUsers" method="get">
                 <button class="btn btn-primary text-center m-3" type="submit">View Users</button>
             </form>
