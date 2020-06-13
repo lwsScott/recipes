@@ -1,3 +1,10 @@
+/*
+* Lewis Scott
+* 6/4/20
+* filename https://lscott.greenriverdev.com/328/recipes/js/clientSideValidation.js
+* validates data before submitting
+*/
+// if not validate prevent default and do not post data
 let checkForm = function(e) {
     //let form = e.target;
     if (!validate())
@@ -6,12 +13,10 @@ let checkForm = function(e) {
         e.preventDefault();
     }
 };
-
-//document.getElementById("button").addEventListener("click", checkForm, false);
+// on submit checkForm
 document.getElementById("recipe").addEventListener("submit", checkForm, false);
 
-    //document.getElementById("recipe").onsubmit = validate;
-
+    // validate the data
     function validate()
     {
         //alert("Validating");
