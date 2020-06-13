@@ -14,6 +14,10 @@
  * @author Qinghang Zhang
  * @version 1.0
  */
+
+/**
+ * Class User
+ */
 class User
 {
     private $_firstname;
@@ -45,7 +49,7 @@ class User
     }
 
     /**
-     * @return mixed
+     * @return mixed first name
      */
     public function getFirstname()
     {
@@ -53,7 +57,7 @@ class User
     }
 
     /**
-     * @param mixed $first
+     * @param mixed $first as first name
      */
     public function setFirstname($first)
     {
@@ -61,7 +65,7 @@ class User
     }
 
     /**
-     * @return mixed
+     * @return mixed last name
      */
     public function getLastname()
     {
@@ -69,7 +73,7 @@ class User
     }
 
     /**
-     * @param mixed $last
+     * @param mixed $last as last name
      */
     public function setLastname($last)
     {
@@ -77,45 +81,69 @@ class User
     }
 
 
+    /**
+     * @return mixed email address
+     */
     public function getEmail()
     {
         return $this->_email;
     }
 
 
+    /**
+     * @param $email as email address
+     */
     public function setEmail($email)
     {
         $this->_email = $email;
     }
 
+    /**
+     * @return mixed as cell phone number
+     */
     public function getPhone()
     {
         return $this->_phone;
     }
 
 
+    /**
+     * @param $phone as cell phone number
+     */
     public function setPhone($phone)
     {
         $this->_phone = $phone;
     }
 
+    /**
+     * @return mixed as the username
+     */
     public function getUsername()
     {
         return $this->_username;
     }
 
 
+    /**
+     * @param $username as the username
+     */
     public function setUsername($username)
     {
         $this->_username = $username;
     }
 
+    /**
+     * @return mixed as the password
+     */
     public function getPassword()
     {
         return $this->_password;
     }
 
 
+    /**
+     * @param $password as password
+     */
     public function setPassword($password)
     {
         $this->_password = $password;
