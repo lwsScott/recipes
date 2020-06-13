@@ -1,4 +1,8 @@
 <?php
+
+/**
+ * Class User
+ */
 class User
 {
     private $_firstname;
@@ -30,7 +34,7 @@ class User
     }
 
     /**
-     * @return mixed
+     * @return mixed first name
      */
     public function getFirstname()
     {
@@ -38,7 +42,7 @@ class User
     }
 
     /**
-     * @param mixed $first
+     * @param mixed $first as firstname value
      */
     public function setFirstname($first)
     {
@@ -46,7 +50,7 @@ class User
     }
 
     /**
-     * @return mixed
+     * @return mixed last name
      */
     public function getLastname()
     {
@@ -54,7 +58,7 @@ class User
     }
 
     /**
-     * @param mixed $last
+     * @param mixed $last last name
      */
     public function setLastname($last)
     {
@@ -62,45 +66,69 @@ class User
     }
 
 
+    /**
+     * @return mixed email
+     */
     public function getEmail()
     {
         return $this->_email;
     }
 
 
+    /**
+     * @param $email as email
+     */
     public function setEmail($email)
     {
         $this->_email = $email;
     }
 
+    /**
+     * @return mixed cell phone number
+     */
     public function getPhone()
     {
         return $this->_phone;
     }
 
 
+    /**
+     * @param $phone as cell phone
+     */
     public function setPhone($phone)
     {
         $this->_phone = $phone;
     }
 
+    /**
+     * @return mixed username
+     */
     public function getUsername()
     {
         return $this->_username;
     }
 
 
+    /**
+     * @param $username as username
+     */
     public function setUsername($username)
     {
         $this->_username = $username;
     }
 
+    /**
+     * @return mixed password
+     */
     public function getPassword()
     {
         return $this->_password;
     }
 
 
+    /**
+     * @param $password password
+     */
     public function setPassword($password)
     {
         $this->_password = $password;
