@@ -1,4 +1,19 @@
 <?php
+/*
+ * Recipe class for recipe website
+ * 5/30/20
+ * filename https://lscott.greenriverdev.com/328/recipe/classes/recipe.php
+ * @author Lewis Scott
+ * @version 1.0
+ */
+
+/*
+ * Recipe class for recipe website
+ * stores recipe information
+ * 5/30/20
+ * @author Lewis Scott
+ * @version 1.0
+ */
 class Recipe
 {
     //Declare instance variables
@@ -10,6 +25,18 @@ class Recipe
     private $_userId;
 
     // constructor
+
+    /**
+     * Recipe constructor.
+     * @param $name The recipe name
+     * @param $ingredients list of ingredients in an array within a string
+     * @param $directions list of directions in an array within a string
+     * @param $description recipe description
+     * @param $imageId image id if image associated
+     * @param $userId user id
+     * @param $firstName the firstname of the user
+     * @param $lastName the lastname of the user
+     */
     function __construct($name, $ingredients, $directions, $description, $imageId, $userId, $firstName, $lastName)
     {
         $this->_name = $name;
@@ -24,6 +51,7 @@ class Recipe
     }
 
     /**
+     * Set the image Id
      * @param mixed $imageId
      */
     public function setImageId($imageId)
@@ -32,6 +60,7 @@ class Recipe
     }
 
     /**
+     * get the user id
      * @return mixed
      */
     public function getUserId()
@@ -40,6 +69,7 @@ class Recipe
     }
 
     /**
+     * Get the firstname
      * @return mixed
      */
     public function getFirstName()
@@ -48,6 +78,7 @@ class Recipe
     }
 
     /**
+     * get the last name
      * @return mixed
      */
     public function getLastName()
@@ -56,6 +87,7 @@ class Recipe
     }
 
     /**
+     * Get the recipe name
      * @return mixed
      */
     public function getName()
@@ -64,6 +96,7 @@ class Recipe
     }
 
     /**
+     * get the ingredients
      * @return mixed
      */
     public function getIngredients()
@@ -72,6 +105,7 @@ class Recipe
     }
 
     /**
+     * get the directions
      * @return mixed
      */
     public function getDirections()
@@ -80,6 +114,7 @@ class Recipe
     }
 
     /**
+     * get the description
      * @return mixed
      */
     public function getDescription()
@@ -88,6 +123,7 @@ class Recipe
     }
 
     /**
+     * get the image Id
      * @return mixed
      */
     public function getImageId()
@@ -95,15 +131,16 @@ class Recipe
         return $this->_imageId;
     }
 
+    /**
+     * String representation of the recipe
+     * @return string
+     */
     public function toString()
     {
         return "Recipe: " . $this->_name . "<br>" .
             "Description: <p>" . $this->_description . "</p>" .
             "Ingredients: <p>" . $this->__ingredients . "</p>" .
             "Directions: <p>" . $this->_directions . "</p>";
-
     }
-
-
 }
 

@@ -1,4 +1,19 @@
 <?php
+/*
+ * User class page for dating website
+ * 5/30/20
+ * filename https://lscott.greenriverdev.com/328/recipes/classes/user.php
+ * @author Lewis Scott
+ * @version 1.0
+ */
+
+/*
+ * User class for recipe website
+ * stores user information
+ * 5/30/20
+ * @author Lewis Scott
+ * @version 1.0
+ */
 class User
 {
     private $_firstname;
