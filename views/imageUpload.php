@@ -25,15 +25,25 @@
     <form action="#" method="post" enctype="multipart/form-data">
         <input type="file" name="fileToUpload">
         <input type="submit" value="Upload File" name="submit">
-        <br>
     </form>
 </div>
+
+<!-- View Recipes -->
 <div class="container card rounded">
+    <br>
+    <p>Proceed without submitting photo</p>
+    <form action="recipes" method="get">
+        <button class="btn btn-primary text-center m-3 float-right" type="submit">Next</button>
+    </form>
+</div>
+
+<!--<div class="container card rounded">
     <form>
-        <p>Proceed without submitting photo</p>
         <a href="recipes" class="btn-primary float-right m-2">Next ></a>
     </form>
-</div>
+</div>-->
+
+
 
 
 <!-- Optional JavaScript -->

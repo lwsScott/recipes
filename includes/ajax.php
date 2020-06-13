@@ -1,12 +1,24 @@
 <?php
+/*
+ * ajax page for recipe website
+ * queries username to determine if available
+ * sets the session nameAvail variable
+ * 5/30/20
+ * filename https://lscott.greenriverdev.com/328/recipes/controller/controller.php
+ * @author Lewis Scott
+ * @version 1.0
+ */
 session_start();
+
+// check which database to use depending on site
 if ($_SERVER['USER'] == 'lscottgr') {
     require_once '/home2/lscottgr/db.php';
 }
 else if ($_SERVER['USER'] == 'qzhanggr') {
     require_once '/home2/qzhanggr/db.php';
 }
-
+// check the username for availability
+// query the database and count usernames
 if(isset($_POST['username'])) {
     $username = $_POST['username'];
 

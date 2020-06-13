@@ -5,7 +5,6 @@
     <title>Admin Page</title>
     <link rel="stylesheet" href="styles/styles.css">
     <include href="includes/header.html"></include>
-
 </head>
 <body>
 <include href="includes/navBar.html"></include>
@@ -32,8 +31,12 @@
             <a href="login"><img class="img" src="images/login.jpg"></a>
             <p>click to login</p>
         </div>
-
-
+    </div>
+    <!-- Set Featured Recipes -->
+    <div class="col-6 text-center">
+        <form action="setFeaturedRecipes" method="get">
+            <button class="btn btn-primary text-center m-3" type="submit">Set Featured Recipes</button>
+        </form>
     </div>
 
 </div>

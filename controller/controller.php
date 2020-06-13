@@ -7,8 +7,8 @@
  * @author Lewis Scott
  * @version 1.0
  */
-
-/*
+/**
+ * Class RecipeController
  * Class RecipeController
  * routes and validates data
  * interacts with the database object
@@ -20,7 +20,13 @@
  */
 class RecipeController
 {
+    /**
+     * @var
+     */
     private $_f3; //router
+    /**
+     * @var
+     */
     private $_validator; //validation object
 
     /**
@@ -377,7 +383,7 @@ class RecipeController
                 }
             }
         }
-
+        // display login
         $view = new Template();
         echo $view->render
         ('views/login.php');
@@ -388,6 +394,7 @@ class RecipeController
      */
     public function logout()
     {
+        // logout
         $view = new Template();
         echo $view->render
         ('views/logout.php');
@@ -541,6 +548,9 @@ class RecipeController
 
     /*
      *  display individual user
+     */
+    /**
+     *
      */
     public function userDetail()
     {
