@@ -1,12 +1,33 @@
 <?php
+/*
+ * Database Class for recipe website
+ * store and retrieve information to/from database
+ * 5/30/20
+ * filename https://lscott.greenriverdev.com/328/recipes/model/database.php
+ * @author Lewis Scott
+ * @version 1.0
+ */
 
-//require_once ("config-recipe.php");
+//turn on error reporting
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
+/*
+ * Class Database
+ * constructs database object and connection
+ * provides database storage and retrieval functions
+ * 5/30/20
+ * @author Lewis Scott
+ * @version 1.0
+ */
 class Database
 {
     //PDO object
     private $_dbh;
 
+    /**
+     * Database constructor.
+     */
     function __construct()
     {
         try {
@@ -30,6 +51,10 @@ class Database
         }
     }
 
+    /**
+     * Returns an array of recipes from the database
+     * @return array the recipes
+     */
     function getRecipes()
     {
         //1. Define the query
@@ -49,7 +74,11 @@ class Database
         return $result;
     }
 
-
+    /**
+     * Get the details of a selected recipe given a recipeId
+     * @param $recipeId the recipeId of the recipe
+     * @return mixed the recipe
+     */
     function getDetails($recipeId)
     {
         //1. Define the query
@@ -71,16 +100,19 @@ class Database
         return $result;
     }
 
+    /**
+     * Inserts a recipe into the database
+     * @param $recipe the recipe to add
+     */
     function addRecipe($recipe)
     {
-        echo '<h1>I made it to database addRecipe with valid data</h1>';
+        //echo '<h1>I made it to database addRecipe with valid data</h1>';
         //var_dump($recipe);
 
-        var_dump($_SESSION);
+        //var_dump($_SESSION);
         $userId = $_SESSION['userId'];
         //echo $userId;
         //1. Define the query
-        // remove the image for now TODO fix
         $sql = "INSERT INTO recipes (recipeName, ingredients, directions, description, userId, firstName, lastName)
                 VALUES (:recipeName, :ingredients, :directions,
                         :description, :userId, :firstName, :lastName)";
@@ -117,11 +149,14 @@ class Database
         //echo $id;
     }
 
+    /**
+     * Associate an image with a recipe
+     * @param $recipe the recipe
+     */
     function addImage($recipe)
     {
         $userId = $recipe->getUserId();
         //1. Define the query
-        // remove the image for now TODO fix
         $sql = "UPDATE recipes SET imageId = (:imageId) 
                 WHERE recipeId = (:recipeId)";
 
@@ -138,7 +173,7 @@ class Database
 
         //4. Execute the statement
         $result = $statement->execute();
-        echo "Result: " . $result;
+        //echo "Result: " . $result;
 
         //Get the key of the last inserted row
         $recipeId = $this->_dbh->lastInsertId();
@@ -165,8 +200,11 @@ class Database
         return $result;
     }
 
-    /*
+    /**
      * Get the User ID given a username and password
+     * @param $username the username
+     * @param $password the password
+     * @return mixed|string the userId if true, else an error message
      */
     function getUserId($username, $password)
     {
@@ -197,6 +235,11 @@ class Database
         }
     }
 
+    /**
+     * Get the filename for an image
+     * @param $imageId the id of the image
+     * @return mixed|string the filename if successful, else error message
+     */
     function getFileName($imageId)
     {
         //echo $username . "and" . $password. "<br>";
@@ -226,6 +269,11 @@ class Database
         }
     }
 
+    /**
+     * Get a username given a userId
+     * @param $userId the userId
+     * @return mixed|string the username if successful, else error message
+     */
     function getUserName($userId)
     {
         //1. Define the query
@@ -253,9 +301,11 @@ class Database
         }
     }
 
-    /*
- * Get the User ID given a username and password
- */
+    /**
+     * Get the permission of the user
+     * @param $userId the userId
+     * @return mixed|string the permission if successful, else error message
+     */
     function getPermission($userId)
     {
         //echo $username . "and" . $password. "<br>";
@@ -285,6 +335,10 @@ class Database
         }
     }
 
+    /**
+     * Insert a new user into the database
+     * @param $newUser the user to add
+     */
     function writeUser($newUser)
     {
         echo '<h1>database php called</h1>';
@@ -327,8 +381,10 @@ class Database
         $id = $this->_dbh->lastInsertId();
     }
 
-    /*
-     * Show the user detail in another pages
+    /**
+     * Get user details
+     * @param $userId the user to get details
+     * @return mixed the details
      */
     function getUserDetails($userId)
     {
