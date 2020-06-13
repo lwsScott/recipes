@@ -17,14 +17,14 @@
         - checks class to allow premium users to submit image
         - displays the user submitted in the recipe displays
 
-####Data can be viewed, added, updated, and deleted.
+####Data can be viewed, added
 - View recipes, View Users
 - Add User
 - Add Premium User
 - Add recipe
 
 #### Has a history of commits from both team members to a Git repository. Commits are clearly commented.
-- Git pull, push with each other (79 commits currently)
+- Git pull, push with each other (88 commits currently)
 
 ####Uses OOP, and defines multiple classes, including at least one inheritance relationship.
 - User Class

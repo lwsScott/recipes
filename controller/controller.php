@@ -9,7 +9,6 @@
  */
 /**
  * Class RecipeController
- * Class RecipeController
  * routes and validates data
  * interacts with the database object
  * creates User, Premium User and recipe objects
@@ -435,7 +434,7 @@ class RecipeController
     {
         $valid = true;
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            var_dump($_POST);
+            //var_dump($_POST);
             if (!$this->_validator->validName($_POST['firstName'])) {
 
                 //Set an error variable in the F3 hive
