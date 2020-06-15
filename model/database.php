@@ -160,7 +160,7 @@ class Database
         $sql = "UPDATE recipes SET imageId = (:imageId) 
                 WHERE recipeId = (:recipeId)";
 
-        var_dump($sql);
+        //var_dump($sql);
         //2. Prepare the statement
         $statement = $this->_dbh->prepare($sql);
         //$image = $recipe->getImageId();

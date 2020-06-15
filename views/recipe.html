@@ -1,8 +1,12 @@
-
+<!--
+  Lewis Scott
+  5/17/20
+  filename https://lscott.greenriverdev.com/328/recipes/views/recipe.html
+  Recipe page
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>Recipe</title>
     <include href="includes/header.html"></include>
 </head>
@@ -21,17 +25,23 @@
     </true>
 </check>
 
-<ul class="card mb-0 ml-3 mt-3 p-2">Ingredients:
-    <repeat group="{{ @ingArray }}" value="{{ @ingredient }}">
-        <li class="card mb-0 ml-1 mt-1 p-1">{{ @ingredient }}</li>
-    </repeat>
-</ul>
+<div class="card mb-0 ml-3 mt-3 p-2">
+    <p>Ingredients:</p>
+    <ul>
+        <repeat group="{{ @ingArray }}" value="{{ @ingredient }}">
+            <li class="card mb-0 mt-1 p-1">{{ @ingredient }}</li>
+        </repeat>
+    </ul>
+</div>
 
-<ul class="card mb-0 ml-3 mt-3 p-2">Directions:
-    <repeat group="{{ @dirArray }}" value="{{ @direction }}">
-        <li class="card mb-0 ml-1 mt-1 p-1">{{ @direction }}</li>
-    </repeat>
-</ul>
+<div class="card mb-0 ml-3 mt-3 p-2">
+    <p>Directions:</p>
+    <ul>
+        <repeat group="{{ @dirArray }}" value="{{ @direction }}">
+            <li class="card mb-0 mt-1 p-1">{{ @direction }}</li>
+        </repeat>
+    </ul>
+</div>
 
 
 <form action="{{ @BASE }}/recipes" method="get">

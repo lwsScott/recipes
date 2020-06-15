@@ -1,7 +1,12 @@
+<!--
+  Lewis Scott
+  5/17/20
+  filename https://lscott.greenriverdev.com/328/recipes/views/submitRecipe.html
+  Submit Recipe page
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>Recipe Submit</title>
     <include href="includes/header.html"></include>
 </head>
@@ -24,32 +29,38 @@
         <label for="ingredient">Ingredient:</label>
         <input id="ingredient" type="text" name="Inglist">
         <button id="btnIng">Add an ingredient</button>
+        <br>
+        <span class="err" id="errIng"></span>
+        <span>
+            <check if="{{ isset(@errors['ingredients']) }}">
+                <p>{{ @errors['ingredients'] }}</p>
+            </check>
+        </span>
     </div>
     <div class="col-2-3">
         <h5>Ingredient List</h5>
         <ul id="ingList"></ul>
     </div>
-    <span class="err" id="errIng">
-        <check if="{{ isset(@errors['ingredients']) }}">
-            <p>{{ @errors['ingredients'] }}</p>
-        </check>
-    </span>
+
 
     <!-- Add Directions and display-->
     <div class="form-group">
         <label for="direction">Directions:</label>
         <input id="direction" type="text" name="Dirlist">
         <button id="btnDir">Add directions</button>
+        <br>
+        <span class="err" id="errDir"></span>
+        <span>
+            <check if="{{ isset(@errors['directions']) }}">
+                <p>{{ @errors['directions'] }}</p>
+            </check>
+        </span>
     </div>
     <div class="col-2-3">
         <h5>Direction List</h5>
         <ul id="dirList"></ul>
     </div>
-    <span class="err" id="errDir">
-        <check if="{{ isset(@errors['directions']) }}">
-            <p>{{ @errors['directions'] }}</p>
-        </check>
-    </span>
+
 
     <form class="form-group" id="recipe" action="#" method="post">
 
@@ -62,7 +73,8 @@
                     <label for="recipeName">Recipe Name:</label>
                     <input type="text" class="form-control" id="recipeName" name="recipeName" placeholder="Recipe Name"
                            value="<check if='{{ !empty(@selectedName) }}'>{{ @selectedName }}</check>">
-                    <span class="err" id="errName">
+                    <span class="err" id="errName"></span>
+                    <span>
                         <check if="{{ isset(@errors['name']) }}">
                             <p>{{ @errors['name'] }}</p>
                         </check>
@@ -73,7 +85,8 @@
                 <div>
                     <label for="description">Description:</label>
                     <textarea type="text" class="form-control" id="description" name="description" placeholder="Description"><check if='{{ !empty(@selectedDescription) }}'>{{ @selectedDescription }}</check></textarea>
-                    <span class="err" id="errDesc">
+                    <span class="err" id="errDesc"></span>
+                    <span>
                         <check if="{{ isset(@errors['description']) }}">
                             <p>{{ @errors['description'] }}</p>
                         </check>

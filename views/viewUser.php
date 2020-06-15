@@ -36,10 +36,7 @@ error_reporting(E_ALL);
             </tr>
         </repeat>
 
-
-
     </table>
-
 
     <a href="newUser">Add new User</a>
 </div>

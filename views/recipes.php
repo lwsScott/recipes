@@ -3,11 +3,15 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 ?>
-
+<!--
+  Lewis Scott
+  5/17/20
+  filename https://lscott.greenriverdev.com/328/recipes/views/recipes.php
+  Recipes page
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>Recipes</title>
     <include href="includes/header.html"></include>
 </head>

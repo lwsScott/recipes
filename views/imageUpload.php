@@ -2,7 +2,7 @@
 * Image Upload page for dating website
 * uploads image
 * 5/30/20
-* filename https://lscott.greenriverdev.com/328/dating/views/imageUpload.php
+* filename https://lscott.greenriverdev.com/328/recipes/views/imageUpload.php
 * @author Lewis Scott
 * @version 1.0
 */-->

@@ -1,3 +1,9 @@
+<!--
+  Lewis Scott
+  5/17/20
+  filename https://lscott.greenriverdev.com/328/recipes/views/home.html
+  Home page view site
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +30,7 @@
             <!-- If recipe has photo display that  -->
             <check if="{{ !empty($recipeOne['imageId']) }}">
                 <true>
-                    <img class="img-fluid rounded m-2 p-2" src="../uploader/uploads/{{ @filenameOne }}" alt="image">
+                    <img class=" img-thumbnail rounded w-100 m-2 p-2" src="../uploader/uploads/{{ @filenameOne }}" alt="image">
                 </true>
             </check>
         </div>
@@ -38,7 +44,7 @@
             <!-- If recipe has photo display that  -->
             <check if="{{ !empty($recipeTwo['imageId']) }}">
                 <true>
-                    <img class="img-fluid rounded m-2 p-2" src="../uploader/uploads/{{ @filenameTwo }}" alt="image">
+                    <img class="img-thumbnail rounded w-100 m-2 p-2" src="../uploader/uploads/{{ @filenameTwo }}" alt="image">
                 </true>
             </check>
         </div>
