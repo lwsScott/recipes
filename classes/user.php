@@ -26,7 +26,7 @@ class User
     private $_phone;
     private $_username;
     private $_password;
-
+    private $_userId;
 
     /**
      * Student constructor.
@@ -37,7 +37,7 @@ class User
      * @param null $gpa
      * @param null $advisor
      */
-    public function __construct($first, $last, $email, $phone, $username,$password)
+    public function __construct($first, $last, $email, $phone, $username, $password)
     {
 //        $this->_sid = $sid;
         $this->_firstname = $first;

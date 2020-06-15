@@ -23,6 +23,7 @@ class Recipe
     private $_description;
     private $_imageId;
     private $_userId;
+    private $_recipeId;
 
     // constructor
 
@@ -47,7 +48,6 @@ class Recipe
         $this->_userId = $userId;
         $this->_firstName = $firstName;
         $this->_lastName = $lastName;
-
     }
 
     /**
