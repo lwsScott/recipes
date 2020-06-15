@@ -1,4 +1,12 @@
 <?php
+/*
+ * Index page for recipe website
+ * provides routes to various views and runs fat free
+ * 5/30/20
+ * filename https://lscott.greenriverdev.com/328/recipes/index.php
+ * @author Lewis Scott
+ * @version 1.0
+ */
 //Turn on error reporting
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -66,7 +74,7 @@ $f3->route('GET|POST /recipeSubmit', function () {
     $GLOBALS['controller']->recipe();
 });
 
-// the logout
+// the logout page
 $f3->route('GET|POST /logout', function () {
     $GLOBALS['controller']->logout();
 });
@@ -91,24 +99,6 @@ $f3->route('GET|POST /admin', function () {
     ('views/admin.html');
 });
 
-// summary page
-$f3->route('GET|POST /summary', function () {
-    //echo '<h1>Initial home page check</h1>';
-    $view = new Template();
-    echo $view->render
-    ('views/summary.html');
-});
-
-// new user submit page route
-/*
-$f3->route('GET|POST /newUser', function ($f3) {
-    //echo '<h1>Initial home page check</h1>';
-    $view = new Template();
-    echo $view->render
-    ('views/newUser.html');
-});
-*/
-
 //Define a route that displays student detail
 $f3->route('GET|POST /viewUsers', function(){
 
@@ -119,14 +109,6 @@ $f3->route('GET|POST /viewUsers', function(){
 $f3->route('GET|POST /newUser', function () {
     //echo '<h1>I made it here</h1>';
     $GLOBALS['controller']->newUser();
-//    $f3->set('firstName', $_POST['firstName']);
-//    $f3->set('lastName', $_POST['lastName']);
-//    $f3->set('phone', $_POST['phone']);
-//    $f3->set('email', $_POST['email']);
-//    $f3->set('username', $_POST['username']);
-//    $f3->set('password', $_POST['password']);
-//    $f3->set('userId', $_POST['userId']);
-//    $f3->set('perId', $_POST['perId']);
 });
 
 // view detail users
@@ -136,10 +118,7 @@ $f3->route('GET|POST /users/@userId', function ($f3,$params) {
 
     $f3->set('userId',$userId);
 
-
     $GLOBALS['controller']->userDetail($f3);
-
-
 });
 
 //Run fat free
