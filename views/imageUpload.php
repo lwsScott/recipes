@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Profile photo</title>
+    <title>Recipe image</title>
     <include href="includes/header.html"></include>
 </head>
 <body>
@@ -18,7 +18,7 @@
 <include href="includes/navBar.html"></include>
 
 <div class="container card rounded">
-    <h3>Premium Members may upload a profile photo</h3>
+    <h3>Premium Members may upload a recipe photo</h3>
     <p>Select a file to upload</p>
     <p>Valid file types include jpg, png and gif</p>
 
